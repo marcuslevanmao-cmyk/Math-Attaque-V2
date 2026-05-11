@@ -96,9 +96,9 @@ function griToPix(gx, gy) {
         py: hauteure - gy * celHei
     }
 }
-var tire = false
-var path = []
-var t    = 0
+let tire = false
+let path = []
+let t    = 0
 // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_usage
 function drawScene() {
 ctx.fillStyle = "#000"
@@ -199,7 +199,3 @@ function shoot() {
     step()
 }
 drawScene()
-
-
-
-
