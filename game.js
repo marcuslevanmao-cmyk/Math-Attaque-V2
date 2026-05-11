@@ -174,7 +174,7 @@ function lancer() {
     document.getElementById("divAffiche").innerText = ""
     function step() {
         var worldX = playerX + t
-        var worldY = playerY + (a*t*t + b*t)
+        var worldY = playerY + (-a*t*t + b*t)
         var pos= griToPix(worldX, worldY)
         path.push(pos)
         drawScene()
