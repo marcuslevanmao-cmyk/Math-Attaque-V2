@@ -65,3 +65,7 @@ input, textarea {
   font: linear-gradient(45deg, #0066ff, #ff32d6);
   border-width: 3px;
 }
+.homepage {
+  font-size : 50px;
+  line-height : 1.5;
+}
