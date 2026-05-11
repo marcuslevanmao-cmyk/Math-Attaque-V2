@@ -1,9 +1,8 @@
-.body{
-  margin:0;
-  background-color:linear-gradient(90deg,rgb(228, 57, 44) 0% 50%, black 100%);
-  color:white;
-  font-family:sans-serif;
-  margin-left: 40px;
+body{
+
+  background:linear-gradient(90deg,rgb(228, 57, 44) 0% 30%, black 100%);
+
+
 }
 
 .screen{
