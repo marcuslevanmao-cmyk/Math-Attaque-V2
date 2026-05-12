@@ -167,7 +167,9 @@ function lancer() {
         document.getElementById("divAffiche").innerText = "Entrez des valeurs pour a et b!"
         return
     }
-    if (tire) { return }
+    if (tire) { 
+        return
+    }
     tire = true
     t= 0
     path = []
