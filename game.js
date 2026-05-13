@@ -208,3 +208,11 @@ function nouvelleparabole() {
 }
 drawScene()
 
+document.addEventListener('DOMContentLoaded', function() {
+    const savedName = localStorage.getItem('mathAttaqueUser');
+    if (savedName) {
+        document.getElementById('player-display').textContent = "Joueur:" + saved-name;
+    }
+});
+
+
