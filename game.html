@@ -2,36 +2,22 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Inscription</title>
+    <title>Math Attaque - Jeu</title>
     <link rel="stylesheet" href="style.css">
-   
-
 </head>
 <body>
-        <h2 id="usernameDisplay"></h2>
-    <center>
-        <canvas id="myCanvas" width="1600" height="500" style="border:1px solid rgb(138, 7, 7)"></canvas>
-        <form>
-            <br>
-            <h1>Entrer votre parabole</h1>
-            <!-- textbox pour le nom de l'élève -->
-            <div id="divformule"></div>
-            <p style="font-size: 30px;">
-                Y=
-                <input type="text" id="a" placeholder="a" class="abc">
-                X^2+
-                <input type="text" id="b" placeholder="b" class="abc">
-                X
-                <!--<input type="text" id="c" placeholder="C" class="abc">-->
-                <input type="button" id="btnSoumet" onclick="lancer()" value="TIRER" class="tir">
-            </p>
-            
-            <!-- Création d'une section pour l'affichage des résultats -->
-            <div id="divAffiche"></div>
-            <input type="reset" id="init" onclick="nouvelleparabole()" value="Prochaine ronde" class="nouveaux">
-            <div id="Ereure"></div>
-        </form>
-    </center>
+    <canvas id="myCanvas"></canvas>
+    <h2 id="usernameDisplay"></h2>
+    <div id="ui-panel">
+        <h1>Entrer votre parabole</h1>
+        <div class="equation-row">
+            Y =
+            <input type="text" id="a" placeholder="A" class="abc">
+            X² +
+            <input type="text" id="b" placeholder="B" class="abc">
+            X
+            <input type="button" id="btnSoumet" onclick="lancer()" value="TIRER" class="tir">
+        </div>
     <script src="game.js"></script>
 </body>
 </html>
