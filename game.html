@@ -7,7 +7,8 @@
 </head>
 <body>
     <canvas id="myCanvas"></canvas>
-    <h2 id="usernameDisplay"></h2>
+    <h2 id="usernameDisplay"></h2><br>
+    <p id="level">Niveau: 1</p>
     <div id="ui-panel">
         <h1>Entrer votre parabole</h1>
         <div class="equation-row">
@@ -18,6 +19,9 @@
             X
             <input type="button" id="btnSoumet" onclick="lancer()" value="TIRER" class="tir">
         </div>
+        <div id="divAffiche"></div>
+    </div>
+       <p id="tirs-restants">Tirs: 5 / 5</p>
     <script src="game.js"></script>
 </body>
 </html>
