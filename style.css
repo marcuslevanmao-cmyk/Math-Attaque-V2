@@ -358,3 +358,10 @@ border: 1px solid rgba(255,255,255,0.25);
 padding: 9px 22px;
 text-decoration: none;
 }
+.rtrn-btn {
+text-align: center;
+margin-top: 56px;
+padding-top: 28px;
+border-top: 1px solid rgba(255,255,255,0.07);
+}
+
