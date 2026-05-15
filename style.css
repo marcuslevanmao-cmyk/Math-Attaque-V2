@@ -358,5 +358,36 @@ border: 1px solid rgba(255,255,255,0.25);
 padding: 9px 22px;
 text-decoration: none;
 }
+.rtrn {
+    text-align: center;
+margin-top: 56px;
+padding-top: 28px;
+    background: #dfdfdf;
+    position: relative;
+    border-radius: 100px; 
+    width: 100px;
+    height:30px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 1s ease-in-out;
+    
+}
+.rtrn::after {
+    content: '';
+    position: absolute;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    padding:5px;
+    background: linear-gradient(to bottom right, red 0% 35%, black 100%);
+    z-index: -1;
+}
+.rtrn:hover {
+    color: white;
+    z-index: 0;
+}
 
 
