@@ -52,7 +52,7 @@ function resizeCanvas(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    drawGriddrawGrid(1, 20, 20, "#fdfdfd")
+    drawGrid(1, 20, 20, "#fdfdfd")
     drawScene()
 }
 
