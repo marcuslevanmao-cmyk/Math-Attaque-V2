@@ -64,7 +64,7 @@ let t= 0
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Basic_usage
 function drawScene() {
    //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillRect
-    ctx.fillStyle = "#fdfdfd"
+    ctx.fillStyle = "#000"
     ctx.fillRect(0, 0, largeure, hauteure)
 
     ctx.strokeStyle = "#fdfdfd"
