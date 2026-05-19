@@ -64,10 +64,10 @@ let t= 0
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Basic_usage
 function drawScene() {
    //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillRect
-    ctx.fillStyle = "#000"
+    ctx.fillStyle = "#fdfdfd"
     ctx.fillRect(0, 0, largeure, hauteure)
 
-    ctx.strokeStyle = "rgba(255,255,255,0.1)"
+    ctx.strokeStyle = "#fdfdfd"
     ctx.lineWidth = 1
     for (let j = 0; j <= griCol; j++) {
         ctx.beginPath()
