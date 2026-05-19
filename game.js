@@ -15,6 +15,8 @@ canvas.style.top= "0"
 canvas.style.left = "0"
 canvas.style.zIndex = "0"
 
+canvas.width = largeure
+canvas.height = hauteure
 
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
 function randomPositionPlayerX(minX, maxX) {
