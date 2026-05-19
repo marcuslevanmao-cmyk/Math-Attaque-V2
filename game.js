@@ -63,7 +63,7 @@ let t= 0
 
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Basic_usage
 function drawScene() {
-   /* //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillRect
+   //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillRect
     ctx.fillStyle = "#000"
     ctx.fillRect(0, 0, largeure, hauteure)
 
@@ -80,7 +80,7 @@ function drawScene() {
         ctx.moveTo(0, i * celHei) // part de la gauche
         ctx.lineTo(largeure, i * celHei) // va jusqu'à droite
         ctx.stroke()
-    } */
+    } 
 
     //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/arc
     let player = griToPix(playerX, playerY)
