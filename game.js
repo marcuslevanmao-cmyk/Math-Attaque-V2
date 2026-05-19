@@ -60,27 +60,7 @@ let path = []
 let highlightPaths = []
 let t= 0
 
- function drawGrid(lineWidth, cellWidth, cellHeight, color){
-        ctx.strokeStyle = color;
-        ctx.lineWidth = lineWidth;
-        
-        let width = canvas.width;
-        let height = canvas.height;
-        
-        for(let x = 0; x <= width; x += cellWidth){
-          ctx.beginPath();
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x, height);
-          ctx.stroke();
-        }
-        
-        for(let y = 0; y <= height; y += cellHeight){
-          ctx.beginPath();
-          ctx.moveTo(0, y);
-          ctx.lineTo(width, y);
-          ctx.stroke();
-        }
-    }
+
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Basic_usage
 function drawScene() {
    /* //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillRect
