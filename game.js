@@ -239,7 +239,7 @@ function lancer() {
     step()
 }
 drawScene()
-drawGrid(1, 20, 20, "#fdfdfd")
+drawGrid(1, 16, 10, "#fdfdfd")
 mettreAJourTirs()
 function nouvelleparabole() {
     playerX = randomPositionPlayerX(1, 3)
@@ -255,11 +255,11 @@ function nouvelleparabole() {
     document.getElementById("b").value= ""
     document.getElementById("divAffiche").innerText = ""
     drawScene()
-    drawGrid(1, 20, 20, "#fdfdfd")
+    drawGrid(1, 16, 10, "#fdfdfd")
 
 }
 drawScene()
-drawGrid(1, 20, 20, "#fdfdfd")
+drawGrid(1, 16, 10, "#fdfdfd")
 
 //https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
 let username = localStorage.getItem('mathAttaqueUser') || "Joueur"
