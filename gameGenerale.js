@@ -1,167 +1,257 @@
+let choixNiv = parseInt(localStorage.getItem("choixNiv"))
+
+function choixNiveau(niveau) {
+    localStorage.setItem("choixNiv", parseInt(niveau))
+    choixNiv = parseInt(niveau)
+}
+
+//https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
+
+
+//https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
 const canvas = document.getElementById("myCanvas")
+
+//https://developer.mozilla.org/fr/docs/Web/API/HTMLCanvasElement/getContext
 const ctx = canvas.getContext("2d")
+//https://developer.mozilla.org/fr/docs/Web/API/Window/innerWidth
 const largeure = window.innerWidth
 const hauteure = window.innerHeight
 
+// Référence CSS : https://developer.mozilla.org/fr/docs/Web/CSS/position
 canvas.style.position = "fixed"
-canvas.style.top = "0"
+canvas.style.top= "0"
 canvas.style.left = "0"
 canvas.style.zIndex = "0"
+
 canvas.width = largeure
 canvas.height = hauteure
+// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
+function randomPositionPlayerX(minX, maxX) {
+    minX = Math.ceil(minX)// arrondit vers le haut
+    maxX = Math.floor(maxX) // arrondit vers le bas
+    return Math.floor(Math.random() * (maxX - minX + 1)) + minX
+}
+function randomPositionPlayerY(minY, maxY) {
+    minY = Math.ceil(minY)
+    maxY = Math.floor(maxY)
+    return Math.floor(Math.random() * (maxY - minY + 1)) + minY
+}
+function randomPositionEnemyX(minX, maxX) {
+    minX = Math.ceil(minX)
+    maxX = Math.floor(maxX)
+    return Math.floor(Math.random() * (maxX - minX + 1)) + minX
+}
+function randomPositionEnemyY(minY, maxY) {
+    minY = Math.ceil(minY)
+    maxY = Math.floor(maxY)
+    return Math.floor(Math.random() * (maxY - minY + 1)) + minY
+}
+var playerX = randomPositionPlayerX(1, 3)
+var playerY = randomPositionPlayerY(2, 6)
+var enemyX = randomPositionEnemyX(12, 15)
+var enemyY = randomPositionEnemyY(2, 6)
 
-const griCol = 16
-const gridRow = 10
+const griCol = 16 // nombre de colonnes
+const gridRow = 10 // nombre de rangées
 const celWid = largeure / griCol
-const celHei = hauteure / gridRow
+const celHei = hauteure / gridRow 
 
-function rand(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
-let playerX = rand(1, 3)
-let playerY = rand(2, 6)
-let enemyX  = rand(12, 15)
-let enemyY  = rand(2, 6)
-
+// https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
 function griToPix(gx, gy) {
-    return { px: gx * celWid, py: hauteure - gy * celHei }
+    return {
+        px: gx * celWid,// X normal — va de gauche à droite
+        py: hauteure - gy * celHei
+    }
 }
-
-let tire = false
+let tire= false
 let path = []
 let highlightPaths = []
-let t = 0
-let tirsRestants = 5
-let level = 1
-
-function mettreAJourTirs() {
-    document.getElementById("tirs-restants").innerText = "Tirs: " + tirsRestants + " / 5"
-}
-
+let t= 0
+// https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Basic_usage
 function drawScene() {
+    //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillRect
     ctx.fillStyle = "#000"
     ctx.fillRect(0, 0, largeure, hauteure)
-    ctx.strokeStyle = "rgba(255,255,255,0.35)"
+
+    ctx.strokeStyle = "rgba(255,255,255,0.1)"
     ctx.lineWidth = 1
-    for (let i = 0; i <= griCol; i++) {
-        ctx.beginPath(); ctx.moveTo(i * celWid, 0); ctx.lineTo(i * celWid, hauteure); ctx.stroke()
+    for (let j = 0; j <= griCol; j++) {
+        ctx.beginPath()
+        ctx.moveTo(j * celWid, 0)// part du haut
+        ctx.lineTo(j * celWid, hauteure) // va jusqu'en bas
+        ctx.stroke()
     }
     for (let i = 0; i <= gridRow; i++) {
-        ctx.beginPath(); ctx.moveTo(0, i * celHei); ctx.lineTo(largeure, i * celHei); ctx.stroke()
+        ctx.beginPath()
+        ctx.moveTo(0, i * celHei) // part de la gauche
+        ctx.lineTo(largeure, i * celHei) // va jusqu'à droite
+        ctx.stroke()
     }
-    // joueur cyan
-    let p = griToPix(playerX, playerY)
-    ctx.beginPath(); ctx.arc(p.px, p.py, 8, 0, Math.PI * 2)
-    ctx.fillStyle = "#0cc"; ctx.fill()
-    // ennemi rouge
-    let e = griToPix(enemyX, enemyY)
-    ctx.beginPath(); ctx.arc(e.px, e.py, 8, 0, Math.PI * 2)
-    ctx.fillStyle = "#e44"; ctx.fill()
-
-    // trainees blanches des tirs precedents
-    for (let h = 0; h < highlightPaths.length; h++) {
-        let hp = highlightPaths[h]
-        if (hp.length < 2) continue
-        ctx.beginPath(); ctx.strokeStyle = "rgba(255,255,255,0.5)"; ctx.lineWidth = 2
-        ctx.moveTo(hp[0].px, hp[0].py)
-        for (let i = 1; i < hp.length; i++) ctx.lineTo(hp[i].px, hp[i].py)
+    //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/arc
+    var player = griToPix(playerX, playerY)
+    ctx.beginPath()
+    ctx.arc(player.px, player.py, 8, 0, Math.PI * 2)
+    ctx.fillStyle = "#0cc"// cyan
+    ctx.fill()
+    var enemy = griToPix(enemyX, enemyY)
+    ctx.beginPath()
+    ctx.arc(enemy.px, enemy.py, 8, 0, Math.PI * 2)
+    ctx.fillStyle = "#e44"// rouge
+    ctx.fill()
+drawTurret(player, currentB)
+    drawHighlight()
+}
+//https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/setLineDash
+function drawHighlight() {
+    for (let p = 0; p < highlightPaths.length; p++) {
+        let currentPath = highlightPaths[p]
+        if (currentPath.length < 2) continue
+        ctx.beginPath()
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.5)"
+        ctx.lineWidth = 2
+        ctx.moveTo(currentPath[0].px, currentPath[0].py)
+        for (let i = 1; i < currentPath.length; i++) {
+            ctx.lineTo(currentPath[i].px, currentPath[i].py)
+        }
         ctx.stroke()
     }
 }
-
-function drawTrail(path, pos) {
+//https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Advanced_animations
+function drawTrail(path, currentPos) {
     if (path.length < 2) return
-    ctx.beginPath(); ctx.strokeStyle = "rgba(100,180,255,0.9)"; ctx.lineWidth = 2
+
+    ctx.beginPath()
+    ctx.strokeStyle = "rgba(100, 180, 255, 0.9)"
+    ctx.lineWidth = 2
     ctx.moveTo(path[0].px, path[0].py)
-    for (let i = 1; i < path.length; i++) ctx.lineTo(path[i].px, path[i].py)
+    for (let i = 1; i < path.length; i++) {
+        ctx.lineTo(path[i].px, path[i].py)
+    }
     ctx.stroke()
-    ctx.beginPath(); ctx.arc(pos.px, pos.py, 5, 0, Math.PI * 2)
-    ctx.fillStyle = "#fff"; ctx.fill()
+    ctx.beginPath()
+    ctx.arc(currentPos.px, currentPos.py, 5, 0, Math.PI * 2)
+    ctx.fillStyle = "#fff"
+    ctx.fill()
 }
 
+// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt
 function isNearEnemy(px, py) {
-    let e = griToPix(enemyX, enemyY)
-    let dx = px - e.px, dy = py - e.py
-    return Math.sqrt(dx*dx + dy*dy) < 14
+    var e  = griToPix(enemyX, enemyY)
+    var dx = px - e.px 
+    var dy = py - e.py
+    return Math.sqrt(dx*dx + dy*dy) < 14 // distance totale < 14px = touché!
 }
-
-function screenShake() {
-    document.body.classList.remove("screenShake")
-    void document.body.offsetWidth
-    document.body.classList.add("screenShake")
+let tirsRestants = 5  
+function mettreAJourTirs() {
+    document.getElementById("tirs-restants").innerText = "Tirs: " + tirsRestants + " / 5"
 }
-
-function nouvelleparabole() {
-    playerX = rand(1, 3); playerY = rand(2, 6)
-    enemyX  = rand(12, 15); enemyY = rand(2, 6)
-    tire = false; path = []; t = 0; tirsRestants = 5
-    mettreAJourTirs()
-    document.getElementById("a").value = ""
-    document.getElementById("b").value = ""
-    document.getElementById("c").value = ""
-    document.getElementById("divAffiche").innerText = ""
-    highlightPaths = []
-    drawScene()
-}
-
+let currentB = 0
 function finishShot(didHit) {
     tire = false
+
     if (didHit) {
         document.getElementById("divAffiche").innerText = "HIT!"
         screenShake()
-        highlightPaths = []; tirsRestants = 5; mettreAJourTirs()
-        level++
-        document.getElementById("level").textContent = "Niveau: " + level
+        highlightPaths = []
+        tirsRestants = 5
+        mettreAJourTirs()
+        levelCounter()
         nouvelleparabole()
     } else {
         highlightPaths.push(path.slice())
-        tirsRestants--
+        tirsRestants -= 1
         if (tirsRestants <= 0) {
-            document.getElementById("divAffiche").innerText = "Plus de balles!"
-            setTimeout(() => window.location.href = "homepage.html", 2000)
+            document.getElementById("divAffiche").innerText = "Plus de balles, retourne a l'acceuil!"
+            setTimeout(function() {
+                window.location.href = "homepage.html"
+            }, 2000)
         } else {
             document.getElementById("divAffiche").innerText = "Miss!"
-            mettreAJourTirs(); drawScene()
+            mettreAJourTirs()
+            drawScene()
         }
     }
 }
-
 function lancer() {
-    if (tirsRestants <= 0 || tire) return
-
-    // Forme standard : Y = aX² + bX + c
-    // Dans le jeu, X = t (distance depuis le joueur)
-    // donc Y relatif = a*t² + b*t + c, mais c decale juste la hauteur de depart
+    currentB = b
+    if (tirsRestants <= 0) {
+        document.getElementById("divAffiche").innerText = "Plus de tirs!"
+        return
+    }
+    //https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
     let a = parseFloat(document.getElementById("a").value)
     let b = parseFloat(document.getElementById("b").value)
-    let c = parseFloat(document.getElementById("c").value) || 0
-
+    // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/isNaN
     if (isNaN(a) || isNaN(b)) {
-        document.getElementById("divAffiche").innerText = "Entrez a et b!"
+        document.getElementById("divAffiche").innerText = "Entrez des valeurs pour a et b!"
         return
     }
 
-    tire = true; t = 0; path = []
+    if (tire) return
+
+    tire = true
+    t = 0
+    path = []
     document.getElementById("divAffiche").innerText = ""
 
     function step() {
-        let worldX = playerX + t
-        let worldY = playerY + (a*t*t + b*t + c)
-        let pos = griToPix(worldX, worldY)
+        var worldX = playerX + t
+        var worldY = playerY + (a*t*t + b*t)
+
+        var pos = griToPix(worldX, worldY)
+        // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/push
         path.push(pos)
-        drawScene(); drawTrail(path, pos)
+        drawScene()
+        drawTrail(path, pos)
+        // Cas 1 : touche l'ennemi
+        if (isNearEnemy(pos.px, pos.py)) {
+            finishShot(true)
+            return
+        }
+        if (worldX > griCol || worldY < 0 || worldX < 0) {
+            finishShot(false)
+            return
+        }
 
-        if (isNearEnemy(pos.px, pos.py)) { finishShot(true); return }
-        if (worldX > griCol || worldY < 0 || worldX < 0) { finishShot(false); return }
-
-        t += 0.05
+        t += 0.05 
         requestAnimationFrame(step)
     }
+
     step()
 }
-
-let username = localStorage.getItem('mathAttaqueUser') || "Joueur"
-document.getElementById("usernameDisplay").innerText = "Joueur : " + username
 drawScene()
 mettreAJourTirs()
+function nouvelleparabole() {
+    playerX = randomPositionPlayerX(1, 3)
+    playerY = randomPositionPlayerY(2, 6)
+    enemyX = randomPositionEnemyX(12, 15)
+    enemyY = randomPositionEnemyY(2, 6)
+    tire= false
+    path= []
+    t= 0
+    tirsRestants = 5
+    mettreAJourTirs()
+    document.getElementById("a").value = ""
+    document.getElementById("b").value= ""
+    document.getElementById("divAffiche").innerText = ""
+    drawScene()
+}
+drawScene()
+//https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
+let username = localStorage.getItem('mathAttaqueUser') || "Joueur"
+document.getElementById("usernameDisplay").innerText = "Joueur : " + username
+
+let level = 1
+function levelCounter(){
+    level += 1
+    document.getElementById("level").textContent = "Niveau: " + level;
+}
+function screenShake() {
+    // Ceci remet l'animation à zéro
+    document.body.classList.remove("screenShake")
+    // Cette ligne permet à l'animation de pouvoir rejouer immédiatement
+    void document.body.offsetWidth
+    // Rajoute la classe "screenShake"
+    // l'animation CSS "shake" recommence
+    document.body.classList.add("screenShake")
+}
