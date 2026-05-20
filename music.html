@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Math Attaque - Musique</title>
+  <style>
+    body {
+      background: #000;
+      color: #555;
+      font-family: sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <p>♪ Musique en cours — vous pouvez minimiser cet onglet.</p>
 
+  <!--
+    loop = la musique recommence automatiquement a la fin.
+    autoplay = demarre des que la page est chargee.
+    Le navigateur peut bloquer autoplay sans interaction utilisateur,
+    c'est pourquoi on demarre aussi sur le premier clic (voir script).
+    Reference : https://developer.mozilla.org/fr/docs/Web/HTML/Element/audio
+  -->
+  <audio id="music" src="music.mp3" loop autoplay></audio>
+
+  <script>
+    /*
+      Si le navigateur bloque l'autoplay, on attend le premier clic
+      dans cette page pour demarrer.
+      Ca arrive surtout si l'onglet est ouvert sans interaction prealable.
+    */
+    const audio = document.getElementById('music');
+    audio.play().catch(() => {
+      document.addEventListener('click', () => audio.play(), { once: true });
+    });
+  </script>
+</body>
+</html>
