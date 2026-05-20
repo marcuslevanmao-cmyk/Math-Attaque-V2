@@ -1,7 +1,7 @@
 let choixNiv = localStorage.getItem("choixNiv");
 
 function choixNiveau(niveau) {
-    localStorage.setItem("choixNiv", niveau)
+    localStorage.setItem("choixNiv", parseInt(niveau))
 }
 
 //https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
