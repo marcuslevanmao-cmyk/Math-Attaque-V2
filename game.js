@@ -209,9 +209,13 @@ function lancer() {
         return
     }
     //https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
-    let a = parseFloat(document.getElementById("a").value)
+    let a = parseFloat(document.getElementById("a1").value)
     let b = parseFloat(document.getElementById("b").value)
     let c = 0
+    let h = parseFloat(document.getElementById("h").value)
+    let k = parseFloat(document.getElementById("k").value)
+    let x1 = parseFloat(document.getElementById("x1").value)
+    let x2 = parseFloat(document.getElementById("x2").value)
     // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/isNaN
     if (isNaN(a) || isNaN(b) || isNaN(c)) {
         document.getElementById("divAffiche").innerText = "Entrez des valeurs!"
@@ -220,10 +224,13 @@ function lancer() {
 
     switch (choixNiv){
         case 2 :
-            b = -2*a*b
+            b = -2*a*h
+            c=a*h*h+k
             break
         case 3 :
-            b = -a*(b+c)
+            b = -a*(x1+x2)
+            c=a*x1*x2
+            
             break
     }
 
