@@ -1,3 +1,4 @@
+//variable et fonction qui definnissent la forme de parabole usilisé, la fonction change la valeure, et la variable vais chercher la valeure sauvé
 let choixNiv = parseInt(localStorage.getItem("choixNiv"))
 
 function choixNiveau(niveau) {
@@ -9,6 +10,7 @@ function choixNiveau(niveau) {
 
 
 //https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
+// definition du cavas pour trouver et changer la hauteure du canvas
 const canvas = document.getElementById("myCanvas")
 
 //https://developer.mozilla.org/fr/docs/Web/API/HTMLCanvasElement/getContext
