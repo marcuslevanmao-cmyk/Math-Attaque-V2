@@ -2,34 +2,45 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Inscription</title>
+    <title>Math Attaque - Jeu</title>
     <link rel="stylesheet" href="style.css">
-
+    <!--source : https://www.w3schools.com/jsref/met_audio_play.asp-->
+    <audio id = "explosion">
+        <source src="explosion.mp3" type="audio/mpeg">
+    </audio>
+    <audio id = "tir">
+        <source src="tir.mp3" type="audio/mpeg">
+    </audio>
 </head>
-<body style="background: linear-gradient(90deg,rgb(228, 57, 44) 0%, black 6%); color : white;">
-    <center>
-        <canvas id="myCanvas" width="1500" height="650" style="border:1px solid rgb(138, 7, 7)"></canvas>
-        <form>
-            <br>
-            <h1>Entrer votre parabole</h1>
-            <!-- textbox pour le nom de l'élève -->
-            <div id="divformule"></div>
-            <p style="font-size: 30px;">
-                Y=
-                <input type="text" id="a" placeholder="A" class="abc">
-                (x-
-                <input type="text" id="h" placeholder="H" class="abc">
-                )^2+
-                <input type="text" id="k" placeholder="K" class="abc">
+<body>
+    <canvas id="myCanvas"></canvas>
+    <!--montré le nom d'utilisateur-->
+    <h2 id="usernameDisplay"></h2><br>
+    <!--montré le niveau rendu-->
+    <p id="level">Niveau: 1</p>
+    <!--div pour rentré les valeures des variables-->
+    <div id="ui-panel">
+        <h1>Entrer votre parabole</h1>
+        <div class="equation-row">
+            Y =
+            <!--les input de variable-->
+            <input type="text" id="a" placeholder="A" class="abc">
+            X² +
+            <input type="text" id="b" placeholder="H" class="abc">
+            X + 
+            <input type="text" id="c" placeholder="K" class="abc">
 
-                <input type="button" id="btnSoumet" onclick="lancer()" value="TIRER" class="tir">
-            </p>
-            
-            <!-- Création d'une section pour l'affichage des résultats -->
-            <div id="divAffiche"></div>
-            <div id="Ereure"></div>
-        </form>
-    </center>
-    <script src="niveauxDeux.js"></script>
+            <input type="button" id="btnSoumet" onclick="lancer()" value="TIRER" class="tir">
+        </div>
+        <div id="divAffiche"></div>
+    </div>
+    <audio autoplay loop muted id="bg-music">
+  <source src="your-music-file.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+    <!--montre le nombre de tirs restants-->
+       <p id="tirs-restants">Tirs : 5 / 5</p>
+    <script src="game.js"></script>
+    <script src="name.js"></script>
 </body>
 </html>
