@@ -5,7 +5,9 @@ const canvas = document.getElementById("myCanvas")
 
 //https://developer.mozilla.org/fr/docs/Web/API/HTMLCanvasElement/getContext
 const ctx = canvas.getContext("2d")
-
+//https://developer.mozilla.org/fr/docs/Web/API/Window/innerWidth
+const largeure = window.innerWidth
+const hauteure = window.innerHeight
 
 // Référence CSS : https://developer.mozilla.org/fr/docs/Web/CSS/position
 canvas.style.position = "fixed"
@@ -13,7 +15,8 @@ canvas.style.top= "0"
 canvas.style.left = "0"
 canvas.style.zIndex = "0"
 
-
+canvas.width = largeure
+canvas.height = hauteure
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
 function randomPositionPlayerX(minX, maxX) {
     minX = Math.ceil(minX)// arrondit vers le haut
@@ -40,46 +43,44 @@ let playerY = randomPositionPlayerY(2, 6)
 let enemyX = randomPositionEnemyX(12, 15)
 let enemyY = randomPositionEnemyY(2, 6)
 
+const griCol = 16 // nombre de colonnes
+const gridRow = 10 // nombre de rangées
+const celWid = canvas.width / griCol
+const celHei = canvas.height / gridRow 
 
+// https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
+function griToPix(gx, gy) {
+    return {
+        px: gx * celWid,// X normal — va de gauche à droite
+        py: hauteure - gy * celHei
+    }
+}
 let tire= false
 let path = []
 let highlightPaths = []
 let t= 0
 
-
-
-function resizeCanvas(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    drawGrid(1, 20, 20, "rgba(255,255,255,0.08) 1px, transparent 1pxfd")
-    drawScene()
-}
-
  function drawGrid(lineWidth, cellWidth, cellHeight, color){
         ctx.strokeStyle = color;
         ctx.lineWidth = lineWidth;
         
+        let width = canvas.width;
+        let height = canvas.height;
         
-        
-        for(let x = 0; x <= canvas.width; x += cellWidth){
+        for(let x = 0; x <= width; x += cellWidth){
           ctx.beginPath();
           ctx.moveTo(x, 0);
-          ctx.lineTo(x, canvas.height);
+          ctx.lineTo(x, height);
           ctx.stroke();
         }
         
-        for(let y = 0; y <= canvas.height; y += cellHeight){
+        for(let y = 0; y <= height; y += cellHeight){
           ctx.beginPath();
           ctx.moveTo(0, y);
-          ctx.lineTo(canvas.width, y);
+          ctx.lineTo(width, y);
           ctx.stroke();
         }
     }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-    
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Basic_usage
 function drawScene() {
    /* //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillRect
@@ -165,7 +166,6 @@ function finishShot(didHit) {
 
     if (didHit) {
         document.getElementById("divAffiche").innerText = "HIT!"
-        screenShake()
         highlightPaths = []
         tirsRestants = 5
         mettreAJourTirs()
@@ -236,7 +236,6 @@ drawScene()
 drawGrid(1, 20, 20, "#fdfdfd")
 mettreAJourTirs()
 function nouvelleparabole() {
-    ctx.reset();
     playerX = randomPositionPlayerX(1, 3)
     playerY = randomPositionPlayerY(2, 6)
     enemyX = randomPositionEnemyX(12, 15)
@@ -257,20 +256,11 @@ drawScene()
 drawGrid(1, 20, 20, "#fdfdfd")
 
 //https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
-let username = localStorage.getItem('mathAttaqueUser')
+let username = localStorage.getItem('mathAttaqueUser') || "Joueur"
 document.getElementById("usernameDisplay").innerText = "Joueur : " + username
 
 let level = 1
 function levelCounter(){
     level += 1
     document.getElementById("level").textContent = "Niveau: " + level;
-}
-function screenShake() {
-    // Ceci remet l'animation à zéro
-    document.body.classList.remove("screenShake")
-    // Cette ligne permet à l'animation de pouvoir rejouer immédiatement
-    void document.body.offsetWidth
-    // Rajoute la classe "screenShake"
-    // l'animation CSS "shake" recommence
-    document.body.classList.add("screenShake")
 }
