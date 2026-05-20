@@ -142,10 +142,11 @@ function drawTrail(path, currentPos) {
     for (let i = 1; i < path.length; i++) {
         ctx.lineTo(path[i].px, path[i].py)
     }
+    
     ctx.stroke()
+    /*
     ctx.beginPath()
     ctx.arc(currentPos.px, currentPos.py, 5, 0, Math.PI * 2)
-    /*
     ctx.fillStyle = "#fff"
     ctx.fill()
     */
