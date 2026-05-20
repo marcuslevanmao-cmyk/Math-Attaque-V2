@@ -5,23 +5,40 @@ if (nomSauvegarde) {
     document.getElementById('username-input').value = nomSauvegarde
     document.getElementById('niveau').style.display = 'block'
 }
+
 // Appele quand on clique sur SOUMETTRE
 function nouveauNom() {
-    var username = document.getElementById('username-input').value.trim()
+    var ancienNom = localStorage.getItem('mathAttaqueUser')
+    var username  = document.getElementById('username-input').value.trim()
+
     if (username === "") {
         alert("S'il vous plaît, entrez un nom!")
         return
     }
+
+    // Si le joueur a change de nom, on transfere son score vers le nouveau nom
+    if (ancienNom && ancienNom !== username) {
+        var scores = getScores()
+        // Si l'ancien nom avait un score, on le deplace vers le nouveau nom
+        if (scores[ancienNom] !== undefined) {
+            scores[username] = scores[ancienNom]
+            delete scores[ancienNom]
+            localStorage.setItem('leaderboard', JSON.stringify(scores))
+        }
+    }
+
     localStorage.setItem('mathAttaqueUser', username)
     document.getElementById('niveau').style.display = 'block'
     afficherLeaderboard()
 }
+
 // Permet de soumettre avec la touche Enter
 // https://developer.mozilla.org/fr/docs/Web/API/Element/keydown_event
 document.getElementById('username-input').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') nouveauNom()
 })
 
+// LEADER BOARDDDDDDDD
 // Lit les scores depuis localStorage
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/JSON
 function getScores() {
@@ -40,7 +57,7 @@ function sauvegarderScore(username, niveau) {
 // Affiche le leaderboard dans le tableau HTML
 function afficherLeaderboard() {
     var scores = getScores()
-    var tbody = document.getElementById('leaderboard-body')
+    var tbody  = document.getElementById('leaderboard-body')
     tbody.innerHTML = ''
 
     // Trie les scores du plus grand au plus petit
@@ -53,17 +70,16 @@ function afficherLeaderboard() {
         tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#555">Aucun score</td></tr>'
         return
     }
+
     for (var i = 0; i < tries.length; i++) {
-        var nom= tries[i][0]
+        var nom    = tries[i][0]
         var niveau = tries[i][1]
 
-        // Couleur pour le top 3
         var couleur = '#cccccc'
         if (i === 0) couleur = '#ffe44d'
         if (i === 1) couleur = '#aaaaaa'
         if (i === 2) couleur = '#cd7f32'
 
-        // Cree une ligne et l'ajoute au tableau
         // https://developer.mozilla.org/fr/docs/Web/API/Document/createElement
         var tr = document.createElement('tr')
         tr.innerHTML =
