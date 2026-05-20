@@ -1,0 +1,132 @@
+/* 
+  instructions.css — styles propres a la page d'instructions seulement.
+  Ce fichier est charge APRES style.css dans instructions.html.
+  L'ordre est important : ce fichier ecrase certaines regles de style.css.
+*/
+
+/* 
+  !important force cette regle a gagner contre overflow:hidden de style.css.
+  height:auto ecrase height:100vh pour que la page puisse grandir.
+  Reference : https://developer.mozilla.org/fr/docs/Web/CSS/overflow
+*/
+body {
+  overflow: auto !important;
+  height: auto !important;
+  padding: 2rem 1rem;
+}
+
+.centre {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.entete {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.sous-titre {
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  color: #777777;
+  text-transform: uppercase;
+}
+
+.separateur {
+  height: 1px;
+  background: #2a2a2a;
+  margin: 1.5rem 0;
+}
+
+.bloc-texte {
+  padding: 1.5rem 0;
+}
+
+.bloc-texte h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin: 1.5rem 0 0.4rem 0;
+}
+
+.bloc-texte h2:first-of-type {
+  margin-top: 0;
+}
+
+.bloc-texte p {
+  margin-bottom: 0.6rem;
+  color: #cccccc;
+}
+
+/* <span> colore un seul mot sans creer de nouvelle ligne */
+.rouge { color: #e02020; font-weight: bold; }
+.blanc { color: #ffffff; font-weight: bold; }
+.jaune { color: #ffe44d; font-weight: bold; }
+
+.formule-boite {
+  background: #0d0d0d;
+  border: 1px solid #333333;
+  padding: 0.8rem 1rem;
+  text-align: center;
+  margin: 0.8rem 0;
+  font-family: monospace;
+  font-size: 1.2rem;
+  color: #00cccc;
+}
+
+.boite {
+  border-left: 3px solid #555555;
+  padding: 0.6rem 1rem;
+  margin: 0.8rem 0;
+  font-size: 0.95rem;
+  color: #cccccc;
+}
+
+/*
+  Tableau : <table> > <thead> > <tr> > <th>  (titres)
+                      <tbody> > <tr> > <td>  (donnees)
+  border-collapse:collapse fusionne les bordures entre cellules.
+  Reference : https://www.w3schools.com/html/html_tables.asp
+*/
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8rem 0;
+  font-size: 0.95rem;
+}
+
+th {
+  text-align: left;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid #333333;
+  color: #999999;
+}
+
+td {
+  padding: 0.5rem 0.5rem;
+  border-bottom: 1px solid #222222;
+  vertical-align: top;
+  color: #cccccc;
+}
+
+.pied {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.refs {
+  font-size: 0.62rem;
+  color: #444444;
+  margin-top: 1.2rem;
+}
+
+/* style.css met color:black sur tous les <a>, on l'ecrase ici */
+.refs a {
+  color: #666666;
+  text-decoration: none;
+}
+
+.refs a:hover {
+  color: #aaaaaa;
+}
