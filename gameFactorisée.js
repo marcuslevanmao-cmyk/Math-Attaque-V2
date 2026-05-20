@@ -144,6 +144,24 @@ let tirsRestants = 5
 function mettreAJourTirs() {
     document.getElementById("tirs-restants").innerText = "Tirs: " + tirsRestants + " / 5"
 }
+function sauvegarderScore() {
+    // Recupere le nom du joueur sauvegarde dans localStorage
+    // https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
+    var u = localStorage.getItem('mathAttaqueUser') || "Joueur"
+ 
+    // Recupere les scores existants (ou un objet vide si aucun score)
+    // JSON.parse convertit le texte en objet JavaScript
+    // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+    var scores = JSON.parse(localStorage.getItem('leaderboard') || '{}')
+ 
+    // On sauvegarde seulement si c'est un meilleur score
+    if (!scores[u] || level > scores[u]) {
+        scores[u] = level
+        // JSON.stringify convertit l'objet en texte pour le sauvegarder
+        // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+        localStorage.setItem('leaderboard', JSON.stringify(scores))
+    }
+}
 function finishShot(didHit) {
     tire = false
 
@@ -227,6 +245,7 @@ function lancer() {
 drawScene()
 mettreAJourTirs()
 function nouvelleparabole() {
+    sauvegarderScore()
     playerX = randomPositionPlayerX(1, 3)
     playerY = randomPositionPlayerY(2, 6)
     enemyX = randomPositionEnemyX(12, 15)
