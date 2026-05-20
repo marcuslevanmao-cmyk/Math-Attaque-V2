@@ -1,7 +1,8 @@
-let choixNiv = localStorage.getItem("choixNiv");
+let choixNiv = parseInt(localStorage.getItem("choixNiv"))
 
 function choixNiveau(niveau) {
     localStorage.setItem("choixNiv", parseInt(niveau))
+    choixNiv = parseInt(niveau)
 }
 
 //https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
@@ -200,10 +201,20 @@ function lancer() {
     //https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
     let a = parseFloat(document.getElementById("a").value)
     let b = parseFloat(document.getElementById("b").value)
+    let c = 0
     // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/isNaN
-    if (isNaN(a) || isNaN(b)) {
+    if (isNaN(a) || isNaN(b) || isNaN(c)) {
         document.getElementById("divAffiche").innerText = "Entrez des valeurs pour a et b!"
         return
+    }
+
+    switch (choixNiv){
+        case 2 :
+            b = -2*a*b
+            break
+        case 3 :
+            b = -a*(r+s)
+            break
     }
 
     if (tire) return
@@ -239,7 +250,7 @@ function lancer() {
     step()
 }
 drawScene()
-drawGrid(1, 16, 10, "#fdfdfd")
+drawGrid(1, 20, 20, "#fdfdfd")
 mettreAJourTirs()
 function nouvelleparabole() {
     playerX = randomPositionPlayerX(1, 3)
@@ -255,11 +266,11 @@ function nouvelleparabole() {
     document.getElementById("b").value= ""
     document.getElementById("divAffiche").innerText = ""
     drawScene()
-    drawGrid(1, 16, 10, "#fdfdfd")
+    drawGrid(1, 20, 20, "#fdfdfd")
 
 }
 drawScene()
-drawGrid(1, 16, 10, "#fdfdfd")
+drawGrid(1, 20, 20, "#fdfdfd")
 
 //https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
 let username = localStorage.getItem('mathAttaqueUser') || "Joueur"
