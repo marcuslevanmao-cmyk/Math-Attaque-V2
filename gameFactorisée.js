@@ -12,12 +12,17 @@ const griCol = 16, gridRow = 10
 const celWid = largeure / griCol
 const celHei = hauteure / gridRow
 
-function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min }
+function rand(min, max) { 
+    return Math.floor(Math.random() * (max - min + 1)) + min
+}
 
 let playerX = rand(1,3), playerY = rand(2,6)
 let enemyX  = rand(12,15), enemyY = rand(2,6)
 
-function griToPix(gx, gy) { return { px: gx * celWid, py: hauteure - gy * celHei } }
+function griToPix(gx, gy) { 
+    return { px: gx * celWid, py: hauteure - gy * celHei
+           } 
+}
 
 let tire = false, path = [], highlightPaths = [], t = 0
 let tirsRestants = 5, level = 1
@@ -118,7 +123,7 @@ function lancer() {
     // c =  a*(x1 * x2)
     // Reference : https://www.w3schools.com/js/js_math.asp
     let b = -a * (x1 + x2)
-    let c =  a * (x1 * x2)
+    let c =  0
 
     tire = true; t = 0; path = []
     document.getElementById("divAffiche").innerText = ""
