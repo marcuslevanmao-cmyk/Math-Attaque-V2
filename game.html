@@ -14,20 +14,31 @@
 </head>
 <body>
     <canvas id="myCanvas"></canvas>
+    <!--montré le nom d'utilisateur-->
     <h2 id="usernameDisplay"></h2><br>
+    <!--montré le niveau rendu-->
     <p id="level">Niveau: 1</p>
+    <!--div pour rentré les valeures des variables-->
     <div id="ui-panel">
         <h1>Entrer votre parabole</h1>
         <div class="equation-row">
             Y =
+            <!--les input de variable-->
             <input type="text" id="a" placeholder="A" class="abc">
             X² +
             <input type="text" id="b" placeholder="B" class="abc">
-            X
+            X + 
+            <input type="text" id="c" placeholder="C" class="abc">
+            
             <input type="button" id="btnSoumet" onclick="lancer()" value="TIRER" class="tir">
         </div>
         <div id="divAffiche"></div>
     </div>
+    <audio autoplay loop muted id="bg-music">
+  <source src="your-music-file.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+    <!--montre le nombre de tirs restants-->
        <p id="tirs-restants">Tirs : 5 / 5</p>
     <script src="game.js"></script>
     <script src="name.js"></script>
