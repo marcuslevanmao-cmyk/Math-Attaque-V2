@@ -99,6 +99,13 @@ function drawScene() {
     ctx.fillStyle = "#e44"// rouge
     ctx.fill()
     drawHighlight()
+    // Affiche les coordonnees du joueur et de l'ennemi
+// https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillText
+ctx.font = "16px Rajdhani, sans-serif"
+ctx.fillStyle = "#0cc"
+ctx.fillText("Joueur (" + playerX + ", " + playerY + ")", player.px + 12, player.py - 12)
+ctx.fillStyle = "#e44"
+ctx.fillText("Ennemi (" + enemyX + ", " + enemyY + ")", enemy.px + 12, enemy.py - 12)
 }
 //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/setLineDash
 function drawHighlight() {
