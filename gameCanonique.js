@@ -1,7 +1,3 @@
-// ============================================================
-// canonique.js — forme canonique :  Y = a(X - h)² + k
-// Utilise par : canonique.html
-// ============================================================
 
 const canvas = document.getElementById("myCanvas")
 const ctx = canvas.getContext("2d")
@@ -16,12 +12,18 @@ const griCol = 16, gridRow = 10
 const celWid = largeure / griCol
 const celHei = hauteure / gridRow
 
-function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min }
+function rand(min, max) { 
+    return Math.floor(Math.random() * (max - min + 1)) + min 
+}
 
 let playerX = rand(1,3), playerY = rand(2,6)
 let enemyX  = rand(12,15), enemyY = rand(2,6)
 
-function griToPix(gx, gy) { return { px: gx * celWid, py: hauteure - gy * celHei } }
+function griToPix(gx, gy) { 
+    return { 
+        px: gx * celWid, py: hauteure - gy * celHei 
+    }
+}
 
 let tire = false, path = [], highlightPaths = [], t = 0
 let tirsRestants = 5, level = 1
@@ -42,8 +44,11 @@ function drawScene() {
     let p = griToPix(playerX, playerY)
     ctx.beginPath(); ctx.arc(p.px, p.py, 8, 0, Math.PI*2); ctx.fillStyle = "#0cc"; ctx.fill()
     let e = griToPix(enemyX, enemyY)
-    ctx.beginPath(); ctx.arc(e.px, e.py, 8, 0, Math.PI*2); ctx.fillStyle = "#e44"; ctx.fill()
+    
+    ctx.beginPath(); ctx.arc(
+        e.px, e.py, 8, 0, Math.PI*2); ctx.fillStyle = "#e44"; ctx.fill()
     for (let h = 0; h < highlightPaths.length; h++) {
+        
         let hp = highlightPaths[h]; if (hp.length < 2) continue
         ctx.beginPath(); ctx.strokeStyle = "rgba(255,255,255,0.5)"; ctx.lineWidth = 2
         ctx.moveTo(hp[0].px, hp[0].py)
@@ -122,7 +127,7 @@ function lancer() {
     // c =  a*h*h + k
     // Reference : https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations
     let b = -2 * a * h
-    let c =  a * h * h + k
+    let c =  0
 
     tire = true; t = 0; path = []
     document.getElementById("divAffiche").innerText = ""
