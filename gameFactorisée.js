@@ -153,10 +153,10 @@ function mettreAJourTirs() {
 }
 // Sauvegarde le score du joueur si c'est son meilleur niveau atteint
 function sauvegarderScore() {
-    // Relit le nom a chaque fois — capte les changements de nom
+    // Relit le nom a chaque fois capte les changements de nom
     // https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
-    var username = localStorage.getItem('mathAttaqueUser') || "Joueur"
-    var niveau   = level
+    var username= localStorage.getItem('mathAttaqueUser') || "Joueur"
+    var niveau = level
 
     // Recupere les scores existants depuis localStorage
     // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
