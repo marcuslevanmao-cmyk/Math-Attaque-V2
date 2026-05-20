@@ -145,8 +145,10 @@ function drawTrail(path, currentPos) {
     ctx.stroke()
     ctx.beginPath()
     ctx.arc(currentPos.px, currentPos.py, 5, 0, Math.PI * 2)
+    /*
     ctx.fillStyle = "#fff"
     ctx.fill()
+    */
 }
 
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt
