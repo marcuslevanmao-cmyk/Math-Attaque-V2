@@ -10,4 +10,6 @@ function ouvrirMusiqueTab() {
   les navigateurs le bloquent comme popup.
   On attend donc le premier clic n'importe ou sur la page.
 */
-document.addEventListener('click', ouvrirMusiqueTab, { once: true });
+document.addEventListener('click', ouvrirMusiqueTab, { 
+  once: true
+});
