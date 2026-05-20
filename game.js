@@ -209,7 +209,7 @@ function lancer() {
         return
     }
     //https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
-    let a = parseFloat(document.getElementById("a1").value)
+    let a = parseFloat(document.getElementById("a").value)
     let b = parseFloat(document.getElementById("b").value)
     let c = 0
     let h = parseFloat(document.getElementById("h").value)
