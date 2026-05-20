@@ -98,7 +98,6 @@ function drawScene() {
     ctx.arc(enemy.px, enemy.py, 8, 0, Math.PI * 2)
     ctx.fillStyle = "#e44"// rouge
     ctx.fill()
-drawTurret(player, currentB)
     drawHighlight()
 }
 //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/setLineDash
