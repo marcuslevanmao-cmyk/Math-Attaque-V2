@@ -1,9 +1,4 @@
-function griToPix(gx, gy) {
-    return {
-        px: gx * celWid,// X normal — va de gauche à droite
-        py: canvas.height - gy * celHei
-    }
-}
+
 
 //https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
 const canvas = document.getElementById("myCanvas")
@@ -57,7 +52,7 @@ function resizeCanvas(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    drawGrid(1, 20, 20, "#fdfdfd")
+    drawGrid(1, 20, 20, "rgba(255,255,255,0.08) 1px, transparent 1pxfd")
     drawScene()
 }
 
