@@ -73,7 +73,7 @@ function drawScene() {
     ctx.fillStyle = "#000"
     ctx.fillRect(0, 0, largeure, hauteure)
 
-    ctx.strokeStyle = "rgba(255,255,255,0.1)"
+    ctx.strokeStyle = "rgba(255,255,255,0.4)"
     ctx.lineWidth = 1
     for (let j = 0; j <= griCol; j++) {
         ctx.beginPath()
