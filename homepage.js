@@ -1,20 +1,77 @@
-
-// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String/trim
-function handlePlay() {
-    //https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
-    const input = document.getElementById('username-input')
-    const username = input.value.trim()
+// Recupere le nom sauvegarde et affiche les boutons si deja connecte
+// https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
+var nomSauvegarde = localStorage.getItem('mathAttaqueUser')
+if (nomSauvegarde) {
+    document.getElementById('username-input').value = nomSauvegarde
+    document.getElementById('niveau').style.display = 'block'
+}
+// Appele quand on clique sur SOUMETTRE
+function nouveauNom() {
+    var username = document.getElementById('username-input').value.trim()
     if (username === "") {
-        // Référence : https://developer.mozilla.org/fr/docs/Web/API/Window/alert
-        alert("S'il vous plaît, entrez un nom d'utilisateur !")
-        return// "return" arrête la fonction ici — on ne va pas à game.html
+        alert("S'il vous plaît, entrez un nom!")
+        return
     }
     localStorage.setItem('mathAttaqueUser', username)
-    // https://developer.mozilla.org/fr/docs/Web/API/Window/location
-    window.location.href = "game.html"
+    document.getElementById('niveau').style.display = 'block'
+    afficherLeaderboard()
 }
+// Permet de soumettre avec la touche Enter
+// https://developer.mozilla.org/fr/docs/Web/API/Element/keydown_event
 document.getElementById('username-input').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        handlePlay()// même effet que cliquer sur le bouton
-    }
+    if (e.key === 'Enter') nouveauNom()
 })
+
+// Lit les scores depuis localStorage
+// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/JSON
+function getScores() {
+    return JSON.parse(localStorage.getItem('leaderboard') || '{}')
+}
+
+// Sauvegarde le score seulement si c'est un meilleur score
+function sauvegarderScore(username, niveau) {
+    var scores = getScores()
+    if (!scores[username] || niveau > scores[username]) {
+        scores[username] = niveau
+        localStorage.setItem('leaderboard', JSON.stringify(scores))
+    }
+}
+
+// Affiche le leaderboard dans le tableau HTML
+function afficherLeaderboard() {
+    var scores = getScores()
+    var tbody = document.getElementById('leaderboard-body')
+    tbody.innerHTML = ''
+
+    // Trie les scores du plus grand au plus petit
+    // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+    var tries = Object.entries(scores).sort(function(a, b) {
+        return b[1] - a[1]
+    })
+
+    if (tries.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#555">Aucun score</td></tr>'
+        return
+    }
+    for (var i = 0; i < tries.length; i++) {
+        var nom= tries[i][0]
+        var niveau = tries[i][1]
+
+        // Couleur pour le top 3
+        var couleur = '#cccccc'
+        if (i === 0) couleur = '#ffe44d'
+        if (i === 1) couleur = '#aaaaaa'
+        if (i === 2) couleur = '#cd7f32'
+
+        // Cree une ligne et l'ajoute au tableau
+        // https://developer.mozilla.org/fr/docs/Web/API/Document/createElement
+        var tr = document.createElement('tr')
+        tr.innerHTML =
+            '<td style="color:' + couleur + '; font-weight:bold">' + (i + 1) + '</td>' +
+            '<td>' + nom + '</td>' +
+            '<td style="color:' + couleur + '">' + niveau + '</td>'
+        tbody.appendChild(tr)
+    }
+}
+
+afficherLeaderboard()
