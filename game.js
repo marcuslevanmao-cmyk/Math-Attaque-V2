@@ -1,4 +1,9 @@
-
+function griToPix(gx, gy) {
+    return {
+        px: gx * celWid,// X normal — va de gauche à droite
+        py: canvas.height - gy * celHei
+    }
+}
 
 //https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
 const canvas = document.getElementById("myCanvas")
