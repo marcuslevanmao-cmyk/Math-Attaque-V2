@@ -1,3 +1,4 @@
+// https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
 let choixNiv = parseInt(localStorage.getItem("choixNiv"))
 
 function choixNiveau(niveau) {
@@ -5,30 +6,29 @@ function choixNiveau(niveau) {
     choixNiv = parseInt(niveau)
 }
 
-//https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
-
-
-//https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
+// https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
 const canvas = document.getElementById("myCanvas")
 
-//https://developer.mozilla.org/fr/docs/Web/API/HTMLCanvasElement/getContext
+// https://developer.mozilla.org/fr/docs/Web/API/HTMLCanvasElement/getContext
 const ctx = canvas.getContext("2d")
-//https://developer.mozilla.org/fr/docs/Web/API/Window/innerWidth
+
+// https://developer.mozilla.org/fr/docs/Web/API/Window/innerWidth
 const largeure = window.innerWidth
 const hauteure = window.innerHeight
 
-// Référence CSS : https://developer.mozilla.org/fr/docs/Web/CSS/position
+// https://developer.mozilla.org/fr/docs/Web/CSS/position
 canvas.style.position = "fixed"
-canvas.style.top= "0"
+canvas.style.top  = "0"
 canvas.style.left = "0"
 canvas.style.zIndex = "0"
 
-canvas.width = largeure
+canvas.width  = largeure
 canvas.height = hauteure
+
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
 function randomPositionPlayerX(minX, maxX) {
-    minX = Math.ceil(minX)// arrondit vers le haut
-    maxX = Math.floor(maxX) // arrondit vers le bas
+    minX = Math.ceil(minX)
+    maxX = Math.floor(maxX)
     return Math.floor(Math.random() * (maxX - minX + 1)) + minX
 }
 function randomPositionPlayerY(minY, maxY) {
@@ -46,30 +46,33 @@ function randomPositionEnemyY(minY, maxY) {
     maxY = Math.floor(maxY)
     return Math.floor(Math.random() * (maxY - minY + 1)) + minY
 }
+
 var playerX = randomPositionPlayerX(1, 3)
 var playerY = randomPositionPlayerY(2, 6)
-var enemyX = randomPositionEnemyX(12, 15)
-var enemyY = randomPositionEnemyY(2, 6)
+var enemyX  = randomPositionEnemyX(12, 15)
+var enemyY  = randomPositionEnemyY(2, 6)
 
-const griCol = 16 // nombre de colonnes
-const gridRow = 10 // nombre de rangées
-const celWid = largeure / griCol
-const celHei = hauteure / gridRow 
+const griCol  = 16
+const gridRow = 10
+const celWid  = largeure / griCol
+const celHei  = hauteure / gridRow
 
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
 function griToPix(gx, gy) {
     return {
-        px: gx * celWid,// X normal — va de gauche à droite
+        px: gx * celWid,
         py: hauteure - gy * celHei
     }
 }
-let tire= false
+
+let tire = false
 let path = []
 let highlightPaths = []
-let t= 0
+let t = 0
+
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Basic_usage
 function drawScene() {
-    //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillRect
+    // https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillRect
     ctx.fillStyle = "#000"
     ctx.fillRect(0, 0, largeure, hauteure)
 
@@ -77,30 +80,45 @@ function drawScene() {
     ctx.lineWidth = 1
     for (let j = 0; j <= griCol; j++) {
         ctx.beginPath()
-        ctx.moveTo(j * celWid, 0)// part du haut
-        ctx.lineTo(j * celWid, hauteure) // va jusqu'en bas
+        ctx.moveTo(j * celWid, 0)
+        ctx.lineTo(j * celWid, hauteure)
         ctx.stroke()
     }
     for (let i = 0; i <= gridRow; i++) {
         ctx.beginPath()
-        ctx.moveTo(0, i * celHei) // part de la gauche
-        ctx.lineTo(largeure, i * celHei) // va jusqu'à droite
+        ctx.moveTo(0, i * celHei)
+        ctx.lineTo(largeure, i * celHei)
         ctx.stroke()
     }
-    //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/arc
+
+    // https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/arc
     var player = griToPix(playerX, playerY)
     ctx.beginPath()
     ctx.arc(player.px, player.py, 8, 0, Math.PI * 2)
-    ctx.fillStyle = "#0cc"// cyan
+    ctx.fillStyle = "#0cc"
     ctx.fill()
+
+    // Coordonnees du joueur affichees a cote du point
+    ctx.fillStyle = "rgba(255,255,255,0.6)"
+    ctx.font = "bold 13px sans-serif"
+    ctx.textAlign = "left"
+    ctx.fillText("(" + playerX + ", " + playerY + ")", player.px + 12, player.py - 4)
+
     var enemy = griToPix(enemyX, enemyY)
     ctx.beginPath()
     ctx.arc(enemy.px, enemy.py, 8, 0, Math.PI * 2)
-    ctx.fillStyle = "#e44"// rouge
+    ctx.fillStyle = "#e44"
     ctx.fill()
 
+    // Coordonnees de l'ennemi affichees a cote du point
+    ctx.fillStyle = "rgba(255,255,255,0.6)"
+    ctx.textAlign = "right"
+    ctx.fillText("(" + enemyX + ", " + enemyY + ")", enemy.px - 12, enemy.py - 4)
+
+    drawHighlight()
 }
-//https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/setLineDash
+
+// https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/setLineDash
 function drawHighlight() {
     for (let p = 0; p < highlightPaths.length; p++) {
         let currentPath = highlightPaths[p]
@@ -108,17 +126,19 @@ function drawHighlight() {
         ctx.beginPath()
         ctx.strokeStyle = "rgba(255, 255, 255, 0.5)"
         ctx.lineWidth = 2
+        ctx.setLineDash([6, 4])
         ctx.moveTo(currentPath[0].px, currentPath[0].py)
         for (let i = 1; i < currentPath.length; i++) {
             ctx.lineTo(currentPath[i].px, currentPath[i].py)
         }
         ctx.stroke()
+        ctx.setLineDash([])
     }
 }
-//https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Advanced_animations
+
+// https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Advanced_animations
 function drawTrail(path, currentPos) {
     if (path.length < 2) return
-
     ctx.beginPath()
     ctx.strokeStyle = "rgba(100, 180, 255, 0.9)"
     ctx.lineWidth = 2
@@ -136,17 +156,19 @@ function drawTrail(path, currentPos) {
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt
 function isNearEnemy(px, py) {
     var e  = griToPix(enemyX, enemyY)
-    var dx = px - e.px 
+    var dx = px - e.px
     var dy = py - e.py
-    return Math.sqrt(dx*dx + dy*dy) < 14 // distance totale < 14px = touché!
+    return Math.sqrt(dx * dx + dy * dy) < 14
 }
-let tirsRestants = 5  
+
+let tirsRestants = 5
+
 function mettreAJourTirs() {
     document.getElementById("tirs-restants").innerText = "Tirs: " + tirsRestants + " / 5"
 }
+
 function finishShot(didHit) {
     tire = false
-
     if (didHit) {
         document.getElementById("divAffiche").innerText = "HIT!"
         screenShake()
@@ -159,7 +181,7 @@ function finishShot(didHit) {
         highlightPaths.push(path.slice())
         tirsRestants -= 1
         if (tirsRestants <= 0) {
-            document.getElementById("divAffiche").innerText = "Plus de balles, retourne a l'acceuil!"
+            document.getElementById("divAffiche").innerText = "Plus de balles, retourne a l'accueil!"
             setTimeout(function() {
                 window.location.href = "homepage.html"
             }, 2000)
@@ -170,45 +192,49 @@ function finishShot(didHit) {
         }
     }
 }
+
 function lancer() {
     if (tirsRestants <= 0 || tire) return
 
-    let a  = parseFloat(document.getElementById("a").value)
-    let x1 = parseFloat(document.getElementById("x1").value)
-    let x2 = parseFloat(document.getElementById("x2").value)
+    // Lit les inputs a, h, k (forme standard Y = aX² + hX + k)
+    // Les ids correspondent exactement aux champs dans le HTML
+    // https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
+    let a = parseFloat(document.getElementById("a").value)
+    let h = parseFloat(document.getElementById("h").value)
+    let k = parseFloat(document.getElementById("k").value)
 
-    if (isNaN(a) || isNaN(x1) || isNaN(x2)) {
-        document.getElementById("divAffiche").innerText = "Entrez a, x1 et x2!"
+    if (isNaN(a) || isNaN(h) || isNaN(k)) {
+        document.getElementById("divAffiche").innerText = "Entrez a, h et k!"
         return
     }
 
-    // Forme factorisee : Y = a(X - x1)(X - x2)
-    // On convertit en forme standard pour le moteur de tir :
-    // b = -a*(x1 + x2)
-    // c =  a*(x1 * x2)
-    // Reference : https://www.w3schools.com/js/js_math.asp
-    let b = -a * (x1 + x2)
-    let c =  0
-
-
-
-    if (tire) return
+    // Forme standard : Y = aX² + hX + k
+    // Le moteur de tir calcule la position relative au joueur :
+    //   worldX = playerX + t
+    //   worldY = playerY + (a*t² + h*t + k_offset)
+    // k decale la hauteur de depart — on l'ajoute a playerY au moment du tir.
+    // Reference equations du second degre :
+    // https://www.w3schools.com/js/js_math.asp
 
     tire = true
     t = 0
     path = []
     document.getElementById("divAffiche").innerText = ""
 
+    // Ajuste playerY avec k pour que k=0 signifie "partir de sa propre hauteur"
+    var startY = playerY + k
+
     function step() {
         var worldX = playerX + t
-        var worldY = playerY + (a*t*t + b*t)
+        var worldY = startY + (a * t * t + h * t)
 
         var pos = griToPix(worldX, worldY)
+
         // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/push
         path.push(pos)
         drawScene()
         drawTrail(path, pos)
-        // Cas 1 : touche l'ennemi
+
         if (isNearEnemy(pos.px, pos.py)) {
             finishShot(true)
             return
@@ -218,47 +244,50 @@ function lancer() {
             return
         }
 
-        t += 0.05 
+        t += 0.05
+        // https://developer.mozilla.org/fr/docs/Web/API/window/requestAnimationFrame
         requestAnimationFrame(step)
     }
     step()
 }
 
-
 drawScene()
 mettreAJourTirs()
+
 function nouvelleparabole() {
     playerX = randomPositionPlayerX(1, 3)
     playerY = randomPositionPlayerY(2, 6)
-    enemyX = randomPositionEnemyX(12, 15)
-    enemyY = randomPositionEnemyY(2, 6)
-    tire= false
-    path= []
-    t= 0
+    enemyX  = randomPositionEnemyX(12, 15)
+    enemyY  = randomPositionEnemyY(2, 6)
+    tire = false
+    path = []
+    t = 0
     tirsRestants = 5
     mettreAJourTirs()
+    // Remet les champs a, h, k a vide — correspond aux ids dans le HTML
     document.getElementById("a").value = ""
-    document.getElementById("h").value= ""
-    document.getElementById("k").value= ""
+    document.getElementById("h").value = ""
+    document.getElementById("k").value = ""
     document.getElementById("divAffiche").innerText = ""
     drawScene()
 }
-drawScene()
-//https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
+
+// https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
 let username = localStorage.getItem('mathAttaqueUser') || "Joueur"
 document.getElementById("usernameDisplay").innerText = "Joueur : " + username
 
 let level = 1
-function levelCounter(){
+function levelCounter() {
     level += 1
-    document.getElementById("level").textContent = "Niveau: " + level;
+    document.getElementById("level").textContent = "Niveau: " + level
 }
+
 function screenShake() {
-    // Ceci remet l'animation à zéro
+    // Retire la classe pour remettre l'animation a zero
     document.body.classList.remove("screenShake")
-    // Cette ligne permet à l'animation de pouvoir rejouer immédiatement
+    // Force un reflow pour que l'animation puisse rejouer immediatement
+    // https://developer.mozilla.org/fr/docs/Web/API/HTMLElement/offsetWidth
     void document.body.offsetWidth
-    // Rajoute la classe "screenShake"
-    // l'animation CSS "shake" recommence
+    // Rajoute la classe — l'animation CSS "shake" recommence
     document.body.classList.add("screenShake")
 }
