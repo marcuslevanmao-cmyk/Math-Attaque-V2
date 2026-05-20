@@ -37,7 +37,6 @@ if (nomSauvegarde) {
 //LEADERBOARDDDDDDDDDDDDDDDDDDDDDDDDDD
 /*
   Les scores sont sauvegardes dans localStorage sous la cle "leaderboard".
-  Format : un objet JSON  →  { "Alice": 5, "Bob": 3 }
 
   JSON.parse  : convertit le texte sauvegarde en objet JavaScript
   JSON.stringify : convertit un objet JavaScript en texte pour le sauvegarder
@@ -62,7 +61,9 @@ function afficherLeaderboard() {
     // Object.entries convertit l'objet en tableau de paires [nom, score]
     // .sort trie par score decroissant (b[1] - a[1])
     // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-    let tries = Object.entries(scores).sort(function(a, b) { return b[1] - a[1] })
+    let tries = Object.entries(scores).sort(function(a, b) { 
+        return b[1] - a[1] 
+    })
 
     const tbody = document.getElementById('leaderboard-body')
     // .innerHTML = '' vide le tableau avant de le reremplir
