@@ -1,0 +1,360 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap');
+
+body { 
+    width: 100%; 
+    height: 100vh;     
+    background: #000;  
+    color: #fff; 
+    font-family: 'Rajdhani', sans-serif; 
+    overflow: hidden;    
+    margin: 0;           
+    padding: 0;
+}
+
+/* https://developer.mozilla.org/fr/docs/Web/HTML/Element/canvas */
+#myCanvas { 
+    display: block;
+}
+/* https://developer.mozilla.org/fr/docs/Web/CSS/gradient/linear-gradient */
+.home-overlay { 
+    position: absolute; 
+    inset: 0; 
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.97) 100%); 
+    z-index: 1;
+} 
+
+/* https://developer.mozilla.org/fr/docs/Web/CSS/CSS_flexible_box_layout */
+.home-content { 
+    position: relative; 
+    z-index: 5; 
+    height: 100vh; 
+    display: flex;      
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+} 
+/* https://developer.mozilla.org/fr/docs/Web/CSS/clamp */
+.logo { 
+    font: 500 clamp(52px, 9vw, 100px) 'Bebas Neue', sans-serif; 
+    letter-spacing: 5px; 
+    margin-bottom: 6px; 
+} 
+
+.logo .star { 
+    color: #e02020; 
+} 
+/* https://stackoverflow.com/questions/4151743/how-can-i-change-the-thickness-of-my-hr-tag */
+.logo-underline { 
+    width: min(480px, 72vw); 
+    height: 2px; 
+    background: #ffffff; 
+    margin-bottom: 40px; 
+}
+/* https://www.youtube.com/watch?v=RFGiYHPKWgg */
+.username-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 20; 
+    pointer-events: all;
+}
+/* https://developer.mozilla.org/fr/docs/Web/CSS/pointer-events */
+#username-input {
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.5) !important; 
+    outline: none !important;
+    border-radius: 4px;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    padding: 6px 12px;
+    width: 200px;
+    pointer-events: all;
+    position: relative;
+    z-index: 20;
+}
+
+#username-input::placeholder { 
+    color: rgba(255,255,255,0.4);
+}
+
+.gradient {
+    padding:1px;
+    background: #dfdfdf;
+    position: relative;
+    border-radius: 100px; 
+    width: 100px;
+    height:30px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 1s ease-in-out;
+    
+}
+.gradient::after {
+    content: '';
+    position: absolute;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    padding:5px;
+    background: linear-gradient(to bottom right, red 0% 35%, black 100%);
+    z-index: -1;
+}
+.gradient:hover {
+    color: white;
+    z-index: 0;
+}
+
+/* https://developer.mozilla.org/fr/docs/Web/CSS/text-decoration */
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.levelSel {
+    padding:1px;
+    background: #dfdfdf;
+    position: relative;
+    border-radius: 150px; 
+    width: 250px;
+    height:70px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 1s ease-in-out;
+    
+}
+.levelSel::after {
+    content: '';
+    position: absolute;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    padding:5px;
+    background: linear-gradient(to bottom right, red 0% 35%, black 100%);
+    z-index: -1;
+}
+.levelSel:hover {
+    color: white;
+    z-index: 0;
+}
+/* https://developer.mozilla.org/fr/docs/Web/CSS/text-decoration */
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.levelSel a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: #000;
+}
+
+.levelSel a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: #000;
+}
+/* https://developer.mozilla.org/fr/docs/Web/CSS/position */
+.screen { 
+    position: fixed; 
+    inset: 0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 10;
+} 
+/* https://developer.mozilla.org/fr/docs/Web/CSS/pointer-events */
+.grid { 
+    position: absolute;
+    pointer-events: none;
+    inset: 0; 
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px); 
+    background-size: 60px 60px; 
+    z-index: 11;
+} 
+video {
+    width: min(700px, 90vw);
+    z-index: 1;
+}
+
+#usernameDisplay {
+    position: fixed;
+    top: 16px;
+    left: 24px;
+    z-index: 10;
+    margin: 0;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+}
+
+#ui-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    text-align: center;
+    padding: 12px 0 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+    pointer-events: none; 
+}
+#ui-panel * {
+    pointer-events: auto;
+}
+
+#ui-panel h1 {
+    margin: 0 0 10px;
+    font-size: 22px;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 2px;
+}
+
+.equation-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 26px;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+}
+.abc {
+    background-color: #1a1a1a;
+    color: #fff;
+    border: 2px solid #e02020 !important; 
+    outline: none !important;
+    border-radius: 4px;
+    height: 38px;
+    width: 120px;
+    font-size: 22px;
+    text-align: center;
+    padding: 0 8px;
+}
+
+textarea {
+    border: none;
+    outline: none;
+}
+
+.tir {
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    height: 38px;
+    width: 110px;
+    font-size: 22px;
+    cursor: pointer;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    
+}
+#tirs-restants {
+    position: fixed;
+    top: 75px;
+    left: 24px;
+    z-index: 999999;
+    margin: 0;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+
+}
+#level {
+    position: fixed;
+    top: 50px;
+    left: 24px;
+    z-index: 999999;
+    margin: 0;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+}
+#divAffiche {
+    margin-top: 8px;
+    font-size: 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 3px;
+    color: #fff;
+    min-height: 30px;
+}
+.screenShake {
+    animation: shake 0.2s;
+    animation-iteration-count: 1;
+}
+
+@keyframes shake {
+
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+/* https://developer.mozilla.org/fr/docs/Web/CSS/position */
+#instructions-btn {
+position: fixed;
+top: 20px;
+right: 24px;
+z-index: 100;
+font-family: 'Bebas Neue', sans-serif;
+font-size: 15px;
+letter-spacing: 3px;
+color: rgba(255,255,255,0.8);
+background: rgba(255,255,255,0.07);
+border: 1px solid rgba(255,255,255,0.25);
+padding: 9px 22px;
+text-decoration: none;
+}
