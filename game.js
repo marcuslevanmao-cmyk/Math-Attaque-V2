@@ -214,7 +214,7 @@ function lancer() {
     let c = 0
     // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/isNaN
     if (isNaN(a) || isNaN(b) || isNaN(c)) {
-        document.getElementById("divAffiche").innerText = "Entrez des valeurs pour a et b!"
+        document.getElementById("divAffiche").innerText = "Entrez des valeurs!"
         return
     }
 
@@ -223,7 +223,7 @@ function lancer() {
             b = -2*a*b
             break
         case 3 :
-            b = -a*(r+s)
+            b = -a*(b+c)
             break
     }
 
