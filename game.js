@@ -6,28 +6,30 @@ function choixNiveau(niveau) {
     choixNiv = parseInt(niveau)
 }
 
-//https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
-
 
 //https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
-// definition du cavas pour trouver et changer la hauteure du canvas
+// definition du canvas pour trouver et changer la hauteure du canvas
 const canvas = document.getElementById("myCanvas")
 
 //https://developer.mozilla.org/fr/docs/Web/API/HTMLCanvasElement/getContext
 const ctx = canvas.getContext("2d")
 //https://developer.mozilla.org/fr/docs/Web/API/Window/innerWidth
+//definir largeure et hauteure comme les dimenttions de l'écran
 const largeure = window.innerWidth
 const hauteure = window.innerHeight
 
 // Référence CSS : https://developer.mozilla.org/fr/docs/Web/CSS/position
+//definir les syles de canvas
 canvas.style.position = "fixed"
 canvas.style.top= "0"
 canvas.style.left = "0"
 canvas.style.zIndex = "0"
 
+//changer les dimenssions du canvas pour qu'il soit la grandeure de l'écran
 canvas.width = largeure
 canvas.height = hauteure
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
+//4 fonctions qui definnent au hazard les coordonées x et y de l'enemi et le joeure
 function randomPositionPlayerX(minX, maxX) {
     minX = Math.ceil(minX)// arrondit vers le haut
     maxX = Math.floor(maxX) // arrondit vers le bas
@@ -48,41 +50,53 @@ function randomPositionEnemyY(minY, maxY) {
     maxY = Math.floor(maxY)
     return Math.floor(Math.random() * (maxY - minY + 1)) + minY
 }
-var playerX = randomPositionPlayerX(1, 3)
-var playerY = randomPositionPlayerY(2, 6)
-var enemyX = randomPositionEnemyX(12, 15)
-var enemyY = randomPositionEnemyY(2, 6)
+//metre let valeures dans de variables, et definir la valeure maximum et minimum
+let playerX = randomPositionPlayerX(1, 3)
+let playerY = randomPositionPlayerY(2, 6)
+let enemyX = randomPositionEnemyX(12, 15)
+let enemyY = randomPositionEnemyY(2, 6)
 
+//definir le nombre de collones et l'espace entre les rangées en pixels
 const griCol = 16 // nombre de colonnes
 const gridRow = 10 // nombre de rangées
 const celWid = largeure / griCol
 const celHei = hauteure / gridRow 
 
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
+//touver ou nous devons metre les rangées
 function griToPix(gx, gy) {
     return {
         px: gx * celWid,// X normal — va de gauche à droite
         py: hauteure - gy * celHei
     }
 }
+//definir des variables necessaire pour dessiner la parabole
+//la bouléenne tir assure que nous pouvons seulement 
 let tire= false
+//le tableau ou on sauve les points de la paraboles pour pouvoir la dessiner
 let path = []
 let highlightPaths = []
 let t= 0
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Basic_usage
+//my7
 function drawScene() {
     //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillRect
+    //re initialisé le Canvas, éfacer la viellle parabole et les joueurs
     ctx.fillStyle = "#000"
     ctx.fillRect(0, 0, largeure, hauteure)
-
-    ctx.strokeStyle = "rgba(255,255,255,0.1)"
+    //dessiner les lignes quadrillé(255,255,255) define la couleure, le 0.2 est l'opacité
+    ctx.strokeStyle = "rgba(255 255 255 / 0.35)"
+    //define l'épaisseure de la ligne, ici c'est un pixel
     ctx.lineWidth = 1
-    for (let j = 0; j <= griCol; j++) {
+    //deux for loop qui dessine les grilles
+    //dessine les grille verticale
+    for (let i = 0; i <= griCol; i++) {
         ctx.beginPath()
-        ctx.moveTo(j * celWid, 0)// part du haut
-        ctx.lineTo(j * celWid, hauteure) // va jusqu'en bas
+        ctx.moveTo(i * celWid, 0)// part du haut
+        ctx.lineTo(i * celWid, hauteure) // va jusqu'en bas
         ctx.stroke()
     }
+    //dessine les grilles verticale
     for (let i = 0; i <= gridRow; i++) {
         ctx.beginPath()
         ctx.moveTo(0, i * celHei) // part de la gauche
@@ -90,12 +104,19 @@ function drawScene() {
         ctx.stroke()
     }
     //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/arc
-    var player = griToPix(playerX, playerY)
+    // dessiner le joueur sur le grille
+    let player = griToPix(playerX, playerY)
+    //fonction qui commence à dessiner
     ctx.beginPath()
+    //dessiner un cercle
     ctx.arc(player.px, player.py, 8, 0, Math.PI * 2)
+    //definir la couleure du remplissage
     ctx.fillStyle = "#0cc"// cyan
+    //remplir le cercle
     ctx.fill()
-    var enemy = griToPix(enemyX, enemyY)
+
+    //dessiner l'enemie sur la grille
+    let enemy = griToPix(enemyX, enemyY)
     ctx.beginPath()
     ctx.arc(enemy.px, enemy.py, 8, 0, Math.PI * 2)
     ctx.fillStyle = "#e44"// rouge
@@ -118,13 +139,19 @@ function drawHighlight() {
     }
 }
 //https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Advanced_animations
+//une fonction qui dessine la parabole
 function drawTrail(path, currentPos) {
     if (path.length < 2) return
 
+    //commence à dessiner
     ctx.beginPath()
+    //definir la couleure de dessin
     ctx.strokeStyle = "rgba(100, 180, 255, 0.9)"
+    //definir l'épaisseure de la ligne de la parabole, 2 pixels
     ctx.lineWidth = 2
+    //bouger au joueur pour commencer la parabole
     ctx.moveTo(path[0].px, path[0].py)
+    //un for loop qui vais dessiner la parabole avec des points defini dans un tableau
     for (let i = 1; i < path.length; i++) {
         ctx.lineTo(path[i].px, path[i].py)
     }
@@ -136,12 +163,15 @@ function drawTrail(path, currentPos) {
 }
 
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt
+//fonction qui detecque la proximité la parabole à l'enemie
 function isNearEnemy(px, py) {
-    var e  = griToPix(enemyX, enemyY)
-    var dx = px - e.px 
-    var dy = py - e.py
+    let e  = griToPix(enemyX, enemyY)
+    let dx = px - e.px 
+    let dy = py - e.py
     return Math.sqrt(dx*dx + dy*dy) < 14 // distance totale < 14px = touché!
 }
+
+//variable et fonction pour afficher le nombre de tirs restant dans le jeux
 let tirsRestants = 5  
 function mettreAJourTirs() {
     document.getElementById("tirs-restants").innerText = "Tirs: " + tirsRestants + " / 5"
