@@ -102,24 +102,7 @@ function finishShot(didHit) {
     }
     drawScene()
 }
-// https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
-// https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Transformations
-function lancer() {
-    let a = parseFloat(document.getElementById("a").value)
-    let h = parseFloat(document.getElementById("h").value)
-    let k = parseFloat(document.getElementById("k").value)
-    let c = 0
-    let b = -2*a*h
-    if (isNaN(a) || isNaN(h) || isNaN(k)) {
-        document.getElementById("divAffiche").innerText = "Entrez des valeurs pour a, h et k!"
-        return
-    }
-    let modifier = (playerX-h)**2 + k - playerY
-    if (tire) { return }
-    tire = true
-    t= 0
-    path = []
-    document.getElementById("divAffiche").innerText = ""
+
     function step() {
         var worldX = playerX + t
         var worldY = (a*t*t+b*t) + playerY
