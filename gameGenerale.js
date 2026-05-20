@@ -144,7 +144,6 @@ let tirsRestants = 5
 function mettreAJourTirs() {
     document.getElementById("tirs-restants").innerText = "Tirs: " + tirsRestants + " / 5"
 }
-let currentB = 0
 function finishShot(didHit) {
     tire = false
 
@@ -172,7 +171,6 @@ function finishShot(didHit) {
     }
 }
 function lancer() {
-    currentB = b
     if (tirsRestants <= 0) {
         document.getElementById("divAffiche").innerText = "Plus de tirs!"
         return
