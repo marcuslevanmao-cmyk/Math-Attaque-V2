@@ -1,21 +1,20 @@
+
+
 //https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
-//constante qui nous permet de chercher et changer la grandeure du canvas
 const canvas = document.getElementById("myCanvas")
 
 //https://developer.mozilla.org/fr/docs/Web/API/HTMLCanvasElement/getContext
-//constante qui nous permet de dessiner sur le canvas
 const ctx = canvas.getContext("2d")
-let largeure = window.innerWidth
-let hauteure = window.innerHeight
+
+
 // Référence CSS : https://developer.mozilla.org/fr/docs/Web/CSS/position
 canvas.style.position = "fixed"
 canvas.style.top= "0"
 canvas.style.left = "0"
 canvas.style.zIndex = "0"
 
-canvas.width = largeure
-canvas.height = hauteure
-//fonction qui change les coordonnées des joueurs
+
+// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
 function randomPositionPlayerX(minX, maxX) {
     minX = Math.ceil(minX)// arrondit vers le haut
     maxX = Math.floor(maxX) // arrondit vers le bas
@@ -36,36 +35,27 @@ function randomPositionEnemyY(minY, maxY) {
     maxY = Math.floor(maxY)
     return Math.floor(Math.random() * (maxY - minY + 1)) + minY
 }
-let spawnPlayerX = (canvas.width / 20) / 2
+let playerX = randomPositionPlayerX(1, 3)
+let playerY = randomPositionPlayerY(2, 6)
+let enemyX = randomPositionEnemyX(12, 15)
+let enemyY = randomPositionEnemyY(2, 6)
 
-let playerX = randomPositionPlayerX(0, spawnPlayerX)
-let playerY = randomPositionPlayerY(0, (canvas.height / 20))
-let enemyX = randomPositionEnemyX(spawnPlayerX, (canvas.width / 20))
-let enemyY = randomPositionEnemyY(0, (canvas.height / 20))
 
-playerX = playerX * 20
-playerY = playerY * 20
-enemyX = enemyX * 20
-enemyY = enemyY * 20
-
-console.log("playerX:", playerX, "playerY:", playerY, "enemyX:", enemyX, "enemyY:", enemyY, "spawnPlayerX:", spawnPlayerX, "canvas.width:", canvas.width, "canvas.height:", canvas.height)
-
-//variables pour dessiner la parabole
 let tire= false
 let path = []
 let highlightPaths = []
 let t= 0
 
-/*
-//fonction qui redimensionne le canvas pour qu'il prenne toute la page
+
+
 function resizeCanvas(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    drawGrid(1, 20, 20, "rgba(255,255,255,0.08) 1px, transparent 1pxfd")
+    drawGrid(1, 20, 20, "#fdfdfd")
     drawScene()
 }
-// fonction qui dessine les lignes du canvas pour faire une grille
+
  function drawGrid(lineWidth, cellWidth, cellHeight, color){
         ctx.strokeStyle = color;
         ctx.lineWidth = lineWidth;
@@ -89,34 +79,14 @@ function resizeCanvas(){
 
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
-*/
-
-const griCol = (canvas.width / 20) // nombre de colonnes
-const gridRow = (canvas.height / 20) // nombre de rangées
-const celWid = 20
-const celHei = 20
-
-
-// https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
-function griToPix(gx, gy) {
-    return {
-        px: gx * celWid,// X normal — va de gauche à droite
-        py: canvas.height - gy * celHei
-    }
-}
-
     
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Basic_usage
-//dessine le joueur, l'ennemi sur le canvas
 function drawScene() {
-   
-   // drawGrid(1, 20, 20, "#fdfdfd")
-
-    //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillRect
+   /* //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillRect
     ctx.fillStyle = "#000"
     ctx.fillRect(0, 0, largeure, hauteure)
 
-    ctx.strokeStyle = "#fdfdfd"
+    ctx.strokeStyle = "rgba(255,255,255,0.1)"
     ctx.lineWidth = 1
     for (let j = 0; j <= griCol; j++) {
         ctx.beginPath()
@@ -129,17 +99,17 @@ function drawScene() {
         ctx.moveTo(0, i * celHei) // part de la gauche
         ctx.lineTo(largeure, i * celHei) // va jusqu'à droite
         ctx.stroke()
-    } 
+    } */
 
     //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/arc
-    
+    let player = griToPix(playerX, playerY)
     ctx.beginPath()
-    ctx.arc(playerX, playerY, 8, 0, Math.PI * 2)
+    ctx.arc(player.px, player.py, 8, 0, Math.PI * 2)
     ctx.fillStyle = "#0cc"// cyan
     ctx.fill()
-  
+    let enemy = griToPix(enemyX, enemyY)
     ctx.beginPath()
-    ctx.arc(enemyX, enemyY, 8, 0, Math.PI * 2)
+    ctx.arc(enemy.px, enemy.py, 8, 0, Math.PI * 2)
     ctx.fillStyle = "#e44"// rouge
     ctx.fill()
 
@@ -161,7 +131,6 @@ function drawHighlight() {
     }
 }
 //https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Advanced_animations
-
 function drawTrail(path, currentPos) {
     if (path.length < 2) return
 
@@ -264,7 +233,7 @@ function lancer() {
     step()
 }
 drawScene()
-
+drawGrid(1, 20, 20, "#fdfdfd")
 mettreAJourTirs()
 function nouvelleparabole() {
     ctx.reset();
@@ -281,11 +250,11 @@ function nouvelleparabole() {
     document.getElementById("b").value= ""
     document.getElementById("divAffiche").innerText = ""
     drawScene()
-    
+    drawGrid(1, 20, 20, "#fdfdfd")
 
 }
 drawScene()
-
+drawGrid(1, 20, 20, "#fdfdfd")
 
 //https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
 let username = localStorage.getItem('mathAttaqueUser')
