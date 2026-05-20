@@ -358,3 +358,33 @@ border: 1px solid rgba(255,255,255,0.25);
 padding: 9px 22px;
 text-decoration: none;
 }
+ /* Styles du leaderboard — propres a cette page */
+    #leaderboard-section {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    #leaderboard-section h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 3px;
+      color: #ffffff;
+      margin-bottom: 0.6rem;
+    }
+    #leaderboard-table {
+      border-collapse: collapse;
+      margin: 0 auto;
+      min-width: 260px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+    }
+    #leaderboard-table th {
+      border-bottom: 1px solid #333;
+      padding: 0.3rem 1.2rem;
+      color: #777;
+      letter-spacing: 1px;
+    }
+    #leaderboard-table td {
+      padding: 0.3rem 1.2rem;
+      border-bottom: 1px solid #1a1a1a;
+      color: #cccccc;
+    }
