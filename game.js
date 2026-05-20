@@ -173,7 +173,6 @@ function finishShot(didHit) {
     }
 }
 function lancer() {
-    currentB = b
     if (tirsRestants <= 0) {
         document.getElementById("divAffiche").innerText = "Plus de tirs!"
         return
@@ -181,10 +180,20 @@ function lancer() {
     //https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
     let a = parseFloat(document.getElementById("a").value)
     let b = parseFloat(document.getElementById("b").value)
+    let c = 0
     // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/isNaN
-    if (isNaN(a) || isNaN(b)) {
+    if (isNaN(a) || isNaN(b) || isNaN(c)) {
         document.getElementById("divAffiche").innerText = "Entrez des valeurs pour a et b!"
         return
+    }
+
+    switch (choixNiv){
+        case 2 :
+            b = -2*a*b
+            break
+        case 3 :
+            b = -a*(r+s)
+            break
     }
 
     if (tire) return
@@ -195,10 +204,10 @@ function lancer() {
     document.getElementById("divAffiche").innerText = ""
 
     function step() {
-        var worldX = playerX + t
-        var worldY = playerY + (a*t*t + b*t)
+        let worldX = playerX + t
+        let worldY = playerY + (a*t*t + b*t)
 
-        var pos = griToPix(worldX, worldY)
+        let pos = griToPix(worldX, worldY)
         // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/push
         path.push(pos)
         drawScene()
