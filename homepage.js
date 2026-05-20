@@ -90,10 +90,7 @@ function afficherLeaderboard() {
         // https://developer.mozilla.org/fr/docs/Web/API/Document/createElement
         const tr = document.createElement('tr')
         tr.innerHTML =
-            '<td style="color:' + couleur + '; font-weight:bold">' + (index + 1) + '</td>' +
-            '<td>' + username + '</td>' +
-            '<td style="color:' + couleur + '">' + niveau + '</td>'
-
+            '<td style="color:' + couleur + '; font-weight:bold">'+(index + 1) + '</td>' +'<td>' + username + '</td>' +'<td style="color:' + couleur + '">' + niveau + '</td>'
         // .appendChild ajoute la ligne dans le tableau
         // https://developer.mozilla.org/fr/docs/Web/API/Node/appendChild
         tbody.appendChild(tr)
