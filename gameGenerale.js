@@ -151,20 +151,21 @@ let tirsRestants = 5
 function mettreAJourTirs() {
     document.getElementById("tirs-restants").innerText = "Tirs: " + tirsRestants + " / 5"
 }
+// Sauvegarde le score du joueur si c'est son meilleur niveau atteint
 function sauvegarderScore() {
-    // Recupere le nom du joueur sauvegarde dans localStorage
+    // Relit le nom a chaque fois capte les changements de nom
     // https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
-    var u = localStorage.getItem('mathAttaqueUser') || "Joueur"
- 
-    // Recupere les scores existants (ou un objet vide si aucun score)
-    // JSON.parse convertit le texte en objet JavaScript
+    var username = localStorage.getItem('mathAttaqueUser') || "Joueur"
+    var niveau   = level
+
+    // Recupere les scores existants depuis localStorage
     // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
     var scores = JSON.parse(localStorage.getItem('leaderboard') || '{}')
- 
-    // On sauvegarde seulement si c'est un meilleur score
-    if (!scores[u] || level > scores[u]) {
-        scores[u] = level
-        // JSON.stringify convertit l'objet en texte pour le sauvegarder
+
+    // Sauvegarde seulement si c'est un meilleur score que l'ancien
+    if (!scores[username] || niveau > scores[username]) {
+        scores[username] = niveau
+        // JSON.stringify convertit l'objet en texte pour pouvoir le sauvegarder
         // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
         localStorage.setItem('leaderboard', JSON.stringify(scores))
     }
