@@ -103,9 +103,9 @@ function drawScene() {
 // https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillText
 ctx.font = "16px Rajdhani, sans-serif"
 ctx.fillStyle = "#0cc"
-ctx.fillText("Joueur (" + playerX + ", " + playerY + ")", player.px + 12, player.py - 12)
+ctx.fillText("(" + playerX + ", " + playerY + ")", player.px + 12, player.py - 12)
 ctx.fillStyle = "#e44"
-ctx.fillText("Ennemi (" + enemyX + ", " + enemyY + ")", enemy.px + 12, enemy.py - 12)
+ctx.fillText("(" + enemyX + ", " + enemyY + ")", enemy.px + 12, enemy.py - 12)
 }
 //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/setLineDash
 function drawHighlight() {
