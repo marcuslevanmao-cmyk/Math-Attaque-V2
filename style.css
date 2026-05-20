@@ -1,6 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap');
-
+/*Ajoute les couleur et fonts au corps de code*/
 body { 
     width: 100%; 
     height: 100vh;     
@@ -11,7 +11,7 @@ body {
     margin: 0;           
     padding: 0;
 }
-
+/*Crée 
 /* https://developer.mozilla.org/fr/docs/Web/HTML/Element/canvas */
 #myCanvas { 
     display: block;
