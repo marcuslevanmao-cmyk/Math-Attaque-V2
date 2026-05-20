@@ -256,7 +256,3 @@ function screenShake() {
     document.body.classList.add("screenShake")
 }
 
-//https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
-let username = localStorage.getItem('mathAttaqueUser') || "Joueur"
-document.getElementById("usernameDisplay").innerText = "Joueur : " + username
-
