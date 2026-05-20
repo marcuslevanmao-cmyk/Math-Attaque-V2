@@ -239,7 +239,8 @@ function nouvelleparabole() {
     tirsRestants = 5
     mettreAJourTirs()
     document.getElementById("a").value = ""
-    document.getElementById("b").value= ""
+    document.getElementById("x1").value= ""
+    document.getElementById("x2").value= ""
     document.getElementById("divAffiche").innerText = ""
     drawScene()
 }
