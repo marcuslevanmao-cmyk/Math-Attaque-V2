@@ -1,20 +1,23 @@
-
+/* Page scrollable remplace les restrictions de style.css */
 body {
   overflow: auto !important;
   height: auto !important;
   padding: 2rem 1rem;
 }
 
+/* Colonne centree */
 .centre {
   max-width: 780px;
   margin: 0 auto;
 }
 
+/* En-tete de la page */
 .entete {
   text-align: center;
   margin-bottom: 2rem;
 }
 
+/* Texte gris en petit sous le logo */
 .sous-titre {
   font-size: 0.8rem;
   letter-spacing: 3px;
@@ -22,16 +25,19 @@ body {
   text-transform: uppercase;
 }
 
+/* Ligne horizontale de separation */
 .separateur {
   height: 1px;
   background: #2a2a2a;
   margin: 1.5rem 0;
 }
 
+/* Bloc de contenu texte */
 .bloc-texte {
   padding: 1.5rem 0;
 }
 
+/* Titres de section */
 .bloc-texte h2 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.5rem;
@@ -39,6 +45,7 @@ body {
   margin: 1.5rem 0 0.4rem 0;
 }
 
+/* Premier titre — pas de marge en haut */
 .bloc-texte h2:first-of-type {
   margin-top: 0;
 }
@@ -59,6 +66,7 @@ body {
   color: #ffe44d; font-weight: bold; 
 }
 
+/* Boite affichant une formule mathematique */
 .formule-boite {
   background: #0d0d0d;
   border: 1px solid #333333;
@@ -70,6 +78,7 @@ body {
   color: #00cccc;
 }
 
+/* Boite conseil avec barre laterale grise */
 .boite {
   border-left: 3px solid #555555;
   padding: 0.6rem 1rem;
@@ -91,6 +100,7 @@ table {
   font-size: 0.95rem;
 }
 
+/* Cellules d'en-tete */
 th {
   text-align: left;
   padding: 0.4rem 0.5rem;
@@ -98,6 +108,7 @@ th {
   color: #999999;
 }
 
+/* Cellules de donnees */
 td {
   padding: 0.5rem 0.5rem;
   border-bottom: 1px solid #222222;
@@ -105,8 +116,11 @@ td {
   color: #cccccc;
 }
 
+/* Bouton retour en bas de page */
 .pied {
   text-align: center;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+
+
