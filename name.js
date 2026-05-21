@@ -20,17 +20,21 @@ function nouveauNom() {
     // afficherLeaderboard() est defini dans homepage.js
     if (typeof afficherLeaderboard === 'function') afficherLeaderboard()
 }
-
-// 'keydown' se declencher quand on appuie sur une touche du clavier
+// sur les pages de jeu, #username-input n'existe pas → evite le TypeError
 // https://developer.mozilla.org/fr/docs/Web/API/Element/keydown_event
-document.getElementById('username-input').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter')
-        nouveauNom()
-})
+var inputField = document.getElementById('username-input')
+if (inputField) {
+    inputField.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter')
+            nouveauNom()
+    })
+}
 // a deja utilise le meme nom dans le meme scope global
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/var
 var nomSauvegarde = localStorage.getItem('mathAttaqueUser')
 if (nomSauvegarde) {
-    document.getElementById('username-input').value = nomSauvegarde
-    document.getElementById('niveau').style.display = 'block'
+    if (document.getElementById('username-input'))
+        document.getElementById('username-input').value = nomSauvegarde
+    if (document.getElementById('niveau'))
+        document.getElementById('niveau').style.display = 'block'
 }
