@@ -1,5 +1,16 @@
 let choixNiv = parseInt(localStorage.getItem("choixNiv"))
 
+
+//Conteur de highscore qui sauvegarde tout dans un local storage.
+let score = 0
+
+let highScore = parseInt(localStorage.getItem('highScore')) || 0
+if (score > parseInt(highScore)) {
+    localStorage.setItem('highScore', score);
+    highScore = score
+}
+document.getElementById("highScoreDisplay").innerText = "Highscore : " + highScore
+
 function choixNiveau(niveau) {
     localStorage.setItem("choixNiv", parseInt(niveau))
     choixNiv = parseInt(niveau)
