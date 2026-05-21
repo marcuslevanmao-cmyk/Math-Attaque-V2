@@ -13,7 +13,7 @@ body {
     padding: 0;
 }
 
-/* Canvas du jeu — plein ecran, gere par JS */
+/* Canvas du jeu  plein ecran, gere par JS */
 /* https://developer.mozilla.org/fr/docs/Web/HTML/Element/canvas */
 #myCanvas { 
     display: block;
@@ -28,7 +28,7 @@ body {
     z-index: 1;
 } 
 
-/* Conteneur principal de la homepage — centre tout verticalement */
+/* Conteneur principal de la homepage  centre tout verticalement */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/CSS_flexible_box_layout */
 .home-content { 
     position: relative; 
@@ -40,7 +40,7 @@ body {
     justify-content: center;
 } 
 
-/* Logo principal — taille fluide selon la largeur de la fenetre */
+/* Logo principal  taille fluide selon la largeur de la fenetre */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/clamp */
 .logo { 
     font: 500 clamp(52px, 9vw, 100px) 'Bebas Neue', sans-serif; 
@@ -135,7 +135,7 @@ a {
     color: black;
 }
 
-/* Bouton de selection de niveau — plus grand que .gradient */
+/* Bouton de selection de niveau  plus grand que .gradient */
 .levelSel {
     padding: 1px;
     background: #dfdfdf;
@@ -175,7 +175,7 @@ a {
     color: #000;
 }
 
-/* Conteneur plein ecran centre — utilise pour l'intro */
+/* Conteneur plein ecran centre  utilise pour l'intro */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/position */
 .screen { 
     position: fixed; 
@@ -186,7 +186,7 @@ a {
     z-index: 10;
 } 
 
-/* Grille decorative de fond — non cliquable */
+/* Grille decorative de fond  non cliquable */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/pointer-events */
 .grid { 
     position: absolute;
@@ -360,7 +360,7 @@ textarea {
     text-decoration: none;
 }
 
-/* Leaderboard — tableau des meilleurs scores */
+/* Leaderboard  tableau des meilleurs scores */
 #leaderboard-section {
     margin-top: 2rem;
     text-align: center;
