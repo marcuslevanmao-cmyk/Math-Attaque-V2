@@ -109,7 +109,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 1s ease-in-out;
-    z-index: 1001;
+    
 }
 
 /*  noir en pseudo-element derriere le bouton */
@@ -121,13 +121,13 @@ body {
     height: 100%;
     border-radius: 100px;
     background: linear-gradient(to bottom right, red 0% 35%, black 100%);
-    z-index: 999;
+    z-index: -1;
 }
 
 /* Texte blanc au survol */
 .gradient:hover {
     color: white;
-    z-index: 1000;
+    z-index: 0;
 }
 
 /* Supprime le soulignement des liens */
