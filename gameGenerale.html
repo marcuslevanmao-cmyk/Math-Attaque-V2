@@ -5,49 +5,50 @@
     <title>Math Attaque - Jeu</title>
     <link rel="icon" type="mathAttack/png" href="medias/mathAttack.png">
     <link rel="stylesheet" href="style.css">
-    <!--source : https://www.w3schools.com/jsref/met_audio_play.asp-->
-    <audio id = "explosion">
+    <!-- Sons du jeu — source : https://www.w3schools.com/jsref/met_audio_play.asp -->
+    <audio id="explosion">
         <source src="explosion.mp3" type="audio/mpeg">
     </audio>
-    <audio id = "tir">
+    <audio id="tir">
         <source src="tir.mp3" type="audio/mpeg">
     </audio>
-    <audio autoplay loop muted id="bg-music">
-  <source src="medias/viacheslavstarostin-game-gaming-video-game-music-471936.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
 </head>
 <body>
-    <!--Le canvas sur lequel on dessine les paraboles
-    -->
+    <!-- Canvas sur lequel on dessine la grille et la parabole -->
     <canvas id="myCanvas"></canvas>
-    <!--montré le nom d'utilisateur-->
+
+    <!-- Nom du joueur recupere depuis localStorage -->
     <h2 id="usernameDisplay"></h2><br>
-    <!--montré le niveau rendu-->
+
+    <!-- Niveau actuel, mis a jour par levelCounter() -->
     <p id="level">Niveau: 1</p>
-    <!--div pour rentré les valeures des variables-->
+
+    <!-- Panneau d'entree de la parabole forme generale : Y = aX² + bX + c -->
     <div id="ui-panel">
         <h1>Entrer votre parabole</h1>
         <div class="equation-row">
             Y =
-            <!--les input de variable-->
             <input type="text" id="a" placeholder="A" class="abc">
             X² +
             <input type="text" id="b" placeholder="B" class="abc">
-            X + 
+            X +
             <input type="text" id="c" placeholder="C" class="abc">
-            <!--le bouton qui fait le "tir" et dessine la parabole-->
+            <!-- Declenche lancer() dans gameGenerale.js -->
             <input type="button" id="btnSoumet" onclick="lancer()" value="TIRER" class="tir">
         </div>
+        <!-- Zone d'affichage : HIT, Miss, erreur -->
         <div id="divAffiche"></div>
     </div>
+
+    <!-- Musique de fond en boucle, muette par defaut -->
     <audio autoplay loop muted id="bg-music">
-<audio autoplay loop muted id="bg-music">
-  <source src="medias/background.mp4" type="audio/mp4">
-  Your browser does not support the audio element.
-</audio>
-    <!--montre le nombre de tirs restants-->
-       <p id="tirs-restants">Tirs : 5 / 5</p>
+        <source src="medias/background.mp4" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Compteur de tirs, mis a jour par mettreAJourTirs() -->
+    <p id="tirs-restants">Tirs : 5 / 5</p>
+
     <script src="gameGenerale.js"></script>
     <script src="name.js"></script>
 </body>
