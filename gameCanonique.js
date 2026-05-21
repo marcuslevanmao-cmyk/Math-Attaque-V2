@@ -302,7 +302,7 @@ let username = localStorage.getItem('mathAttaqueUser') || "Joueur"
 document.getElementById("usernameDisplay").innerText = "Joueur : " + username
 
 let level = 1
-
+function levelCounter() {
 // Incrémente le niveau et mets à jour l'affichage.
     level += 1
     document.getElementById("level").textContent = "Niveau: " + level
