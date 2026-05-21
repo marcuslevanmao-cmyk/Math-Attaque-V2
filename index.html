@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Écran d'intro : affiche opening.mp4 puis loading.mp4 avant de rediriger -->
+    <!--affiche opening.mp4 puis loading.mp4 -->
     <div class="screen" id="introScreen">
         <div class="grid"></div>
-        <!-- Vidéo d'ouverture — visible en premier -->
+        <!-- Vidéo d'ouverture -->
         <video id="opening" muted playsinline preload="auto" src="medias/Opening_Scene.mp4"></video>
-        <!-- Écran de chargement — caché jusqu'à ce que opening se termine -->
+        <!-- Écran de chargement-->
         <video id="loading" muted playsinline preload="auto" hidden src="medias/Loading_screen.mp4"></video>
     </div>
-    <!-- intro.js gère l'enchaînement des vidéos et la redirection -->
+    <!-- intro.js controle l'ordre des videos-->
     <script src="intro.js"></script>
 </body>
 </html>
