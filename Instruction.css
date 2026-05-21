@@ -1,4 +1,4 @@
-/* Page scrollable remplace les restrictions de style.css */
+/* Page scrollable*/
 body {
   overflow: auto !important;
   height: auto !important;
@@ -11,7 +11,7 @@ body {
   margin: 0 auto;
 }
 
-/* En-tete de la page */
+/* Entete de la page */
 .entete {
   text-align: center;
   margin-bottom: 2rem;
@@ -25,7 +25,7 @@ body {
   text-transform: uppercase;
 }
 
-/* Ligne horizontale de separation */
+/* Ligne horizontale de séparation */
 .separateur {
   height: 1px;
   background: #2a2a2a;
