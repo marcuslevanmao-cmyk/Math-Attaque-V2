@@ -1,6 +1,7 @@
-
+/* Polices Google Fonts Bebas Neue pour les titres, Rajdhani pour le texte */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap');
-/*Ajoute les couleur et fonts au corps de code*/
+
+/* Style de base du corps de page */
 body { 
     width: 100%; 
     height: 100vh;     
@@ -11,11 +12,14 @@ body {
     margin: 0;           
     padding: 0;
 }
-/*Crée 
+
+/* Canvas du jeu — plein ecran, gere par JS */
 /* https://developer.mozilla.org/fr/docs/Web/HTML/Element/canvas */
 #myCanvas { 
     display: block;
 }
+
+/* Degrade sombre par-dessus le fond de la homepage */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/gradient/linear-gradient */
 .home-overlay { 
     position: absolute; 
@@ -24,6 +28,7 @@ body {
     z-index: 1;
 } 
 
+/* Conteneur principal de la homepage — centre tout verticalement */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/CSS_flexible_box_layout */
 .home-content { 
     position: relative; 
@@ -34,6 +39,8 @@ body {
     align-items: center; 
     justify-content: center;
 } 
+
+/* Logo principal — taille fluide selon la largeur de la fenetre */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/clamp */
 .logo { 
     font: 500 clamp(52px, 9vw, 100px) 'Bebas Neue', sans-serif; 
@@ -41,9 +48,12 @@ body {
     margin-bottom: 6px; 
 } 
 
+/* Etoile rouge dans le logo */
 .logo .star { 
     color: #e02020; 
 } 
+
+/* Ligne blanche sous le logo */
 /* https://stackoverflow.com/questions/4151743/how-can-i-change-the-thickness-of-my-hr-tag */
 .logo-underline { 
     width: min(480px, 72vw); 
@@ -51,6 +61,8 @@ body {
     background: #ffffff; 
     margin-bottom: 40px; 
 }
+
+/* Ligne horizontale contenant le champ nom + bouton */
 /* https://www.youtube.com/watch?v=RFGiYHPKWgg */
 .username-row {
     display: flex;
@@ -60,6 +72,8 @@ body {
     z-index: 20; 
     pointer-events: all;
 }
+
+/* Champ de saisie du nom de joueur */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/pointer-events */
 #username-input {
     background: rgba(255,255,255,0.1);
@@ -76,24 +90,27 @@ body {
     z-index: 20;
 }
 
+/* Texte gris dans le champ vide */
 #username-input::placeholder { 
     color: rgba(255,255,255,0.4);
 }
 
+/* Bouton avec degrade rouge/noir et bordure arrondie */
 .gradient {
-    padding:1px;
+    padding: 1px;
     background: #dfdfdf;
     position: relative;
     border-radius: 100px; 
     width: 100px;
-    height:30px;
+    height: 30px;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 1s ease-in-out;
-    
 }
+
+/* Degrade rouge → noir en pseudo-element derriere le bouton */
 .gradient::after {
     content: '';
     position: absolute;
@@ -101,35 +118,39 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 100px;
-    padding:5px;
     background: linear-gradient(to bottom right, red 0% 35%, black 100%);
     z-index: -1;
 }
+
+/* Texte blanc au survol */
 .gradient:hover {
     color: white;
     z-index: 0;
 }
 
+/* Supprime le soulignement des liens */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/text-decoration */
 a {
     text-decoration: none;
     color: black;
 }
 
+/* Bouton de selection de niveau — plus grand que .gradient */
 .levelSel {
-    padding:1px;
+    padding: 1px;
     background: #dfdfdf;
     position: relative;
     border-radius: 150px; 
     width: 250px;
-    height:70px;
+    height: 70px;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 1s ease-in-out;
-    
 }
+
+/* Meme degrade rouge → noir que .gradient */
 .levelSel::after {
     content: '';
     position: absolute;
@@ -137,20 +158,16 @@ a {
     width: 100%;
     height: 100%;
     border-radius: 100px;
-    padding:5px;
     background: linear-gradient(to bottom right, red 0% 35%, black 100%);
     z-index: -1;
 }
+
 .levelSel:hover {
     color: white;
     z-index: 0;
 }
-/* https://developer.mozilla.org/fr/docs/Web/CSS/text-decoration */
-a {
-    text-decoration: none;
-    color: black;
-}
 
+/* Texte des boutons de niveau */
 .levelSel a {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 20px;
@@ -158,12 +175,7 @@ a {
     color: #000;
 }
 
-.levelSel a {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 3px;
-    color: #000;
-}
+/* Conteneur plein ecran centre — utilise pour l'intro */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/position */
 .screen { 
     position: fixed; 
@@ -173,6 +185,8 @@ a {
     align-items: center; 
     z-index: 10;
 } 
+
+/* Grille decorative de fond — non cliquable */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/pointer-events */
 .grid { 
     position: absolute;
@@ -184,11 +198,14 @@ a {
     background-size: 60px 60px; 
     z-index: 11;
 } 
+
+/* Video d'intro */
 video {
     width: min(700px, 90vw);
     z-index: 1;
 }
 
+/* Nom du joueur fixe en haut a gauche pendant le jeu */
 #usernameDisplay {
     position: fixed;
     top: 16px;
@@ -200,6 +217,7 @@ video {
     font-size: 22px;
 }
 
+/* Panneau d'entree fixe en bas de l'ecran pendant le jeu */
 #ui-panel {
     position: fixed;
     bottom: 0;
@@ -211,10 +229,13 @@ video {
     background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
     pointer-events: none; 
 }
+
+/* Reactive les clics sur les elements a l'interieur du panneau */
 #ui-panel * {
     pointer-events: auto;
 }
 
+/* Titre du panneau */
 #ui-panel h1 {
     margin: 0 0 10px;
     font-size: 22px;
@@ -223,6 +244,7 @@ video {
     letter-spacing: 2px;
 }
 
+/* Ligne contenant l'equation et les inputs */
 .equation-row {
     display: flex;
     align-items: center;
@@ -232,6 +254,8 @@ video {
     color: #fff;
     font-family: 'Rajdhani', sans-serif;
 }
+
+/* Champs de saisie des variables a, b, c */
 .abc {
     background-color: #1a1a1a;
     color: #fff;
@@ -250,6 +274,7 @@ textarea {
     outline: none;
 }
 
+/* Bouton TIRER */
 .tir {
     background-color: #000;
     color: #fff;
@@ -261,8 +286,9 @@ textarea {
     cursor: pointer;
     font-family: 'Bebas Neue', sans-serif;
     letter-spacing: 2px;
-    
 }
+
+/* Compteur de tirs restants fixe en haut a gauche */
 #tirs-restants {
     position: fixed;
     top: 75px;
@@ -272,8 +298,9 @@ textarea {
     color: #fff;
     font-family: 'Rajdhani', sans-serif;
     font-size: 22px;
-
 }
+
+/* Numero de niveau fixe en haut a gauche */
 #level {
     position: fixed;
     top: 50px;
@@ -284,6 +311,8 @@ textarea {
     font-family: 'Rajdhani', sans-serif;
     font-size: 22px;
 }
+
+/* Zone d'affichage HIT / Miss / erreurs */
 #divAffiche {
     margin-top: 8px;
     font-size: 24px;
@@ -292,99 +321,80 @@ textarea {
     color: #fff;
     min-height: 30px;
 }
+
+/* Classe ajoutee par JS pour declencher l'animation de tremblement */
 .screenShake {
     animation: shake 0.2s;
     animation-iteration-count: 1;
 }
 
+/* Animation de tremblement d'ecran au HIT */
 @keyframes shake {
-
-    0% {
-        transform: translate(1px, 1px) rotate(0deg);
-    }
-
-    10% {
-        transform: translate(-1px, -2px) rotate(-1deg);
-    }
-
-    20% {
-        transform: translate(-3px, 0px) rotate(1deg);
-    }
-
-    30% {
-        transform: translate(3px, 2px) rotate(0deg);
-    }
-
-    40% {
-        transform: translate(1px, -1px) rotate(1deg);
-    }
-
-    50% {
-        transform: translate(-1px, 2px) rotate(-1deg);
-    }
-
-    60% {
-        transform: translate(-3px, 1px) rotate(0deg);
-    }
-
-    70% {
-        transform: translate(3px, 1px) rotate(-1deg);
-    }
-
-    80% {
-        transform: translate(-1px, -1px) rotate(1deg);
-    }
-
-    90% {
-        transform: translate(1px, 2px) rotate(0deg);
-    }
-
-    100% {
-        transform: translate(1px, -2px) rotate(-1deg);
-    }
+    0%   { transform: translate(1px, 1px)   rotate(0deg);  }
+    10%  { transform: translate(-1px, -2px) rotate(-1deg); }
+    20%  { transform: translate(-3px, 0px)  rotate(1deg);  }
+    30%  { transform: translate(3px, 2px)   rotate(0deg);  }
+    40%  { transform: translate(1px, -1px)  rotate(1deg);  }
+    50%  { transform: translate(-1px, 2px)  rotate(-1deg); }
+    60%  { transform: translate(-3px, 1px)  rotate(0deg);  }
+    70%  { transform: translate(3px, 1px)   rotate(-1deg); }
+    80%  { transform: translate(-1px, -1px) rotate(1deg);  }
+    90%  { transform: translate(1px, 2px)   rotate(0deg);  }
+    100% { transform: translate(1px, -2px)  rotate(-1deg); }
 }
+
+/* Bouton Instructions fixe en haut a droite */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/position */
 #instructions-btn {
-position: fixed;
-top: 20px;
-right: 24px;
-z-index: 100;
-font-family: 'Bebas Neue', sans-serif;
-font-size: 15px;
-letter-spacing: 3px;
-color: rgba(255,255,255,0.8);
-background: rgba(255,255,255,0.07);
-border: 1px solid rgba(255,255,255,0.25);
-padding: 9px 22px;
-text-decoration: none;
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 100;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 9px 22px;
+    text-decoration: none;
 }
- /* Styles du leaderboard — propres a cette page */
-    #leaderboard-section {
-      margin-top: 2rem;
-      text-align: center;
-    }
-    #leaderboard-section h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.3rem;
-      letter-spacing: 3px;
-      color: #ffffff;
-      margin-bottom: 0.6rem;
-    }
-    #leaderboard-table {
-      border-collapse: collapse;
-      margin: 0 auto;
-      min-width: 260px;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem;
-    }
-    #leaderboard-table th {
-      border-bottom: 1px solid #333;
-      padding: 0.3rem 1.2rem;
-      color: #777;
-      letter-spacing: 1px;
-    }
-    #leaderboard-table td {
-      padding: 0.3rem 1.2rem;
-      border-bottom: 1px solid #1a1a1a;
-      color: #cccccc;
-    }
+
+/* Leaderboard — tableau des meilleurs scores */
+#leaderboard-section {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+/* Titre du leaderboard */
+#leaderboard-section h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    color: #ffffff;
+    margin-bottom: 0.6rem;
+}
+
+/* Tableau du leaderboard */
+#leaderboard-table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    min-width: 260px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+}
+
+/* En-tetes du tableau */
+#leaderboard-table th {
+    border-bottom: 1px solid #333;
+    padding: 0.3rem 1.2rem;
+    color: #777;
+    letter-spacing: 1px;
+}
+
+/* Cellules de donnees du tableau */
+#leaderboard-table td {
+    padding: 0.3rem 1.2rem;
+    border-bottom: 1px solid #1a1a1a;
+    color: #cccccc;
+}
