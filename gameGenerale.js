@@ -183,7 +183,7 @@ function mettreAJourTirs() {
 
 // Sauvegarde le score du joueur si c'est son meilleur niveau atteint
 function sauvegarderScore() {
-    // Relit le nom a chaque fois — capte les changements de nom
+    // Relit le nom a chaque fois  capte les changements de nom
     // https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
     var username = localStorage.getItem('mathAttaqueUser') || "Joueur"
     var niveau   = level
@@ -201,7 +201,7 @@ function sauvegarderScore() {
     }
 }
 
-// Appele quand le projectile s'arrete — gere HIT et Miss
+// Appele quand le projectile s'arrete  gere HIT et Miss
 function finishShot(didHit) {
     tire = false
     if (didHit) {
@@ -284,7 +284,7 @@ function nouvelleparabole() {
     t = 0
     tirsRestants = 5
     mettreAJourTirs()
-    // Vide les champs a, b — correspond aux ids dans gameGenerale.html
+    // Vide les champs a, b  correspond aux ids dans gameGenerale.html
     document.getElementById("a").value = ""
     document.getElementById("b").value = ""
     document.getElementById("divAffiche").innerText = ""
@@ -313,6 +313,6 @@ function screenShake() {
     // Force un reflow pour que l'animation puisse rejouer immediatement
     // https://developer.mozilla.org/fr/docs/Web/API/HTMLElement/offsetWidth
     void document.body.offsetWidth
-    // Rajoute la classe — l'animation CSS "shake" recommence
+    // Rajoute la classe  l'animation CSS "shake" recommence
     document.body.classList.add("screenShake")
 }
