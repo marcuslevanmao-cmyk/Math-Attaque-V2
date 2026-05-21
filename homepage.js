@@ -37,7 +37,7 @@ document.getElementById('username-input').addEventListener('keydown', function(e
     if (e.key === 'Enter') nouveauNom()
 })
 
-// ── Leaderboard ──────────────────────────────────────────────────────────────
+// LEADERBOARDDDDDDDDDDDDDDDDDDDDDDDDDDdasdasd
 
 // Lit les scores depuis localStorage sous forme d'objet {nom: niveau}
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/JSON
