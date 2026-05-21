@@ -1,4 +1,4 @@
-// Niveau choisi sur la page d'accueil
+// Niveau choisi
 // https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
 let choixNiv = parseInt(localStorage.getItem("choixNiv"))
 
@@ -29,11 +29,11 @@ canvas.style.zIndex = "0"
 canvas.width  = largeure
 canvas.height = hauteure
 
-// Retourne un entier aleatoire entre minX et maxX inclus
+// Retourne un entier random entre minX et maxX inclus
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
 function randomPositionPlayerX(minX, maxX) {
-    minX = Math.ceil(minX)  // arrondit vers le haut
-    maxX = Math.floor(maxX) // arrondit vers le bas
+    minX = Math.ceil(minX)// arrondit vers le haut
+    maxX = Math.floor(maxX)// arrondit vers le bas
     return Math.floor(Math.random() * (maxX - minX + 1)) + minX
 }
 function randomPositionPlayerY(minY, maxY) {
@@ -73,10 +73,10 @@ function griToPix(gx, gy) {
     }
 }
 
-let tire = false       // true si un tir est en cours
-let path = []          // points du tir actuel
-let highlightPaths = []// anciens tirs rates
-let t = 0              // parametre de progression du tir
+let tire = false// true si un tir est en cours
+let path = []// points du tir actuel
+let highlightPaths = []// anciens tirs missed
+let t = 0 // parametre de progression du tir
 
 // Efface et redessine la scene entiere a chaque frame
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Basic_usage
@@ -103,7 +103,7 @@ function drawScene() {
         ctx.stroke()
     }
 
-    // Point du joueur (cyan)
+    //player dotttttwefwefacs
     // https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/arc
     var player = griToPix(playerX, playerY)
     ctx.beginPath()
@@ -121,7 +121,7 @@ function drawScene() {
     // Trainee des anciens tirs rates
     drawHighlight()
 
-    // Coordonnees affichees a cote de chaque point
+    // Coordonnées affichées à côté de chaque point
     // https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillText
     ctx.font = "16px Rajdhani, sans-serif"
     ctx.fillStyle = "#0cc"
@@ -130,7 +130,7 @@ function drawScene() {
     ctx.fillText("Ennemi (" + enemyX + ", " + enemyY + ")", enemy.px + 12, enemy.py - 12)
 }
 
-// Redessine les tirs rates en blanc semi-transparent
+// Redessine les tirs rates en blanc transluscent
 // https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/setLineDash
 function drawHighlight() {
     for (let p = 0; p < highlightPaths.length; p++) {
@@ -176,7 +176,7 @@ function isNearEnemy(px, py) {
 
 let tirsRestants = 5
 
-// Met a jour le compteur de tirs affiche dans le HTML
+// Met a jour le compteur de tirs affiché dans le HTML
 function mettreAJourTirs() {
     document.getElementById("tirs-restants").innerText = "Tirs: " + tirsRestants + " / 5"
 }
@@ -201,7 +201,7 @@ function sauvegarderScore() {
     }
 }
 
-// Appele quand le projectile s'arrete  gere HIT et Miss
+// Appelé quand le projectile s'arrete  gere HIT et Miss
 function finishShot(didHit) {
     tire = false
     if (didHit) {
@@ -296,15 +296,14 @@ function nouvelleparabole() {
 
 drawScene()
 
-// Affiche le nom du joueur recupere depuis localStorage
+// Affiche le nom du joueur de depuis localStorage
 // https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
 let username = localStorage.getItem('mathAttaqueUser') || "Joueur"
 document.getElementById("usernameDisplay").innerText = "Joueur : " + username
 
 let level = 1
 
-// Incremente le niveau et met a jour l'affichage
-function levelCounter() {
+// Incrémente le niveau et mets à jour l'affichage.
     level += 1
     document.getElementById("level").textContent = "Niveau: " + level
 }
