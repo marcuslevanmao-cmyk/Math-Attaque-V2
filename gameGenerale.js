@@ -9,7 +9,7 @@ if (score > parseInt(highScore)) {
     localStorage.setItem('highScore', score);
     highScore = score
 }
-document.getElementById("highScoreDisplay").innerText = "Highscore : " + highScore
+parseInt(document.getElementById("highScoreDisplay")).innerText = "Highscore : " + highScore
 
 function choixNiveau(niveau) {
     localStorage.setItem("choixNiv", parseInt(niveau))
