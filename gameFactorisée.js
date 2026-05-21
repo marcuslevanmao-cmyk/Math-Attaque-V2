@@ -19,7 +19,7 @@ const ctx = canvas.getContext("2d")
 const largeure = window.innerWidth
 const hauteure = window.innerHeight
 
-// Place le canvas en fond fixe derriere l'interface
+// Place le canvas en fondderriere l'interface
 // https://developer.mozilla.org/fr/docs/Web/CSS/position
 canvas.style.position = "fixed"
 canvas.style.top  = "0"
@@ -29,7 +29,7 @@ canvas.style.zIndex = "0"
 canvas.width  = largeure
 canvas.height = hauteure
 
-// Retourne un entier aleatoire entre minX et maxX inclus
+// Retourne un entier aleatoier entre minX et maxX inclus
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
 function randomPositionPlayerX(minX, maxX) {
     minX = Math.ceil(minX)  // arrondit vers le haut
@@ -52,18 +52,18 @@ function randomPositionEnemyY(minY, maxY) {
     return Math.floor(Math.random() * (maxY - minY + 1)) + minY
 }
 
-// Positions de depart aleatoires
+// Positions de departee aleatoires
 var playerX = randomPositionPlayerX(1, 3)
 var playerY = randomPositionPlayerY(2, 6)
 var enemyX  = randomPositionEnemyX(12, 15)
 var enemyY  = randomPositionEnemyY(2, 6)
 
-const griCol  = 16 // nombre de colonnes
+const griCol = 16 // nombre de colonnes
 const gridRow = 10 // nombre de rangees
-const celWid  = largeure / griCol
-const celHei  = hauteure / gridRow
+const celWid = largeure / griCol
+const celHei = hauteure / gridRow
 
-// Convertit des coordonnees de grille en pixels sur le canvas
+// Convertit sdes coordonnees de grille een pixels sur le canvas
 // Y est inverse : 0 en bas, hauteure en haut
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
 function griToPix(gx, gy) {
@@ -73,10 +73,10 @@ function griToPix(gx, gy) {
     }
 }
 
-let tire = false       // true si un tir est en cours
-let path = []          // points du tir actuel
+let tire = false// true si un tir est en cours
+let path = []// points du tir actuel
 let highlightPaths = []// anciens tirs rates
-let t = 0              // parametre de progression du tir
+let t = 0 // parametre de progression du tir
 
 // Efface et redessine la scene entiere a chaque frame
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Basic_usage
@@ -103,7 +103,7 @@ function drawScene() {
         ctx.stroke()
     }
 
-    // Point du joueur (cyan)
+    // Point du joueur(cyan)
     // https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/arc
     var player = griToPix(playerX, playerY)
     ctx.beginPath()
@@ -121,7 +121,7 @@ function drawScene() {
     // Trainee des anciens tirs rates
     drawHighlight()
 
-    // Coordonnees affichees a cote de chaque point
+    // Coordonnées affichées à côté de chaque point 12px up 12x left
     // https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/fillText
     ctx.font = "16px Rajdhani, sans-serif"
     ctx.fillStyle = "#0cc"
@@ -130,7 +130,7 @@ function drawScene() {
     ctx.fillText("Ennemi (" + enemyX + ", " + enemyY + ")", enemy.px + 12, enemy.py - 12)
 }
 
-// Redessine les tirs rates en blanc semi-transparent
+// Redessine les tirs missed en blanc semi-transparent
 // https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/setLineDash
 function drawHighlight() {
     for (let p = 0; p < highlightPaths.length; p++) {
@@ -147,7 +147,7 @@ function drawHighlight() {
     }
 }
 
-// Dessine la trainee bleue du tir en cours et le point blanc du projectile
+// Dessine la trainee bleue du tirs en cours et le point blanc du projectile
 // https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutorial/Advanced_animations
 function drawTrail(path, currentPos) {
     if (path.length < 2) return
@@ -300,7 +300,7 @@ function nouvelleparabole() {
 
 drawScene()
 
-// Affiche le nom du joueur recupere depuis localStorage
+// Affiche le nom du joueur de depuis localStorage
 // https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
 let username = localStorage.getItem('mathAttaqueUser') || "Joueur"
 document.getElementById("usernameDisplay").innerText = "Joueur : " + username
@@ -320,6 +320,5 @@ function screenShake() {
     // Force un reflow pour que l'animation puisse rejouer immediatement
     // https://developer.mozilla.org/fr/docs/Web/API/HTMLElement/offsetWidth
     void document.body.offsetWidth
-    // Rajoute la classe  l'animation CSS "shake" recommence
     document.body.classList.add("screenShake")
 }
