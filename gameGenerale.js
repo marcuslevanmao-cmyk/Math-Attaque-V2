@@ -2,7 +2,7 @@ let choixNiv = parseInt(localStorage.getItem("choixNiv"))
 
 
 //Conteur de highscore qui sauvegarde tout dans un local storage.
-let score = 0
+let score = 1
 
 let highScore = parseInt(localStorage.getItem('highScore')) || 0
 if (score > parseInt(highScore)) {
