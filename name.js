@@ -1,9 +1,10 @@
+// Gère la saisie du nom du joueur et la persistance via localStorage
+
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String/trim
 function nouveauNom() {
     const input = document.getElementById('username-input')
     // .trim() enleve les espaces au debut et a la fin
     const username = input.value.trim()
-
     if (username === "") {
         // https://developer.mozilla.org/fr/docs/Web/API/Window/alert
         alert("S'il vous plaît, entrez un nom!")
@@ -12,11 +13,9 @@ function nouveauNom() {
     // localStorage garde les donnees meme apres fermeture du navigateur
     // https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
     localStorage.setItem('mathAttaqueUser', username)
-
     // .style.display = 'block' rend un element visible
     // https://developer.mozilla.org/fr/docs/Web/CSS/display
     document.getElementById('niveau').style.display = 'block'
-
     // Raffraichit le leaderboard apres soumission du nom
     // afficherLeaderboard() est defini dans homepage.js
     if (typeof afficherLeaderboard === 'function') afficherLeaderboard()
