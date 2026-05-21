@@ -19,7 +19,7 @@ const ctx = canvas.getContext("2d")
 const largeure = window.innerWidth
 const hauteure = window.innerHeight
 
-// Place le canvas en fond fixe derriere l'interface
+// Place le canvas en fond fixe derriere l'interfaces
 // https://developer.mozilla.org/fr/docs/Web/CSS/position
 canvas.style.position = "fixed"
 canvas.style.top  = "0"
@@ -29,7 +29,7 @@ canvas.style.zIndex = "0"
 canvas.width  = largeure
 canvas.height = hauteure
 
-// Retourne un entier aleatoire entre minX et maxX inclus
+// Retourne un entier aléatoire entre minX et maxX inclus
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
 function randomPositionPlayerX(minX, maxX) {
     minX = Math.ceil(minX)  // arrondit vers le haut
@@ -250,8 +250,6 @@ function lancer() {
     t = 0
     path = []
     document.getElementById("divAffiche").innerText = ""
-
-    // Avance le projectile d'un pas et planifie le suivant
     // https://developer.mozilla.org/fr/docs/Web/API/window/requestAnimationFrame
     function step() {
         var worldX = playerX + t
@@ -271,8 +269,6 @@ function lancer() {
 
 drawScene()
 mettreAJourTirs()
-
-// Reinitialise les positions et les champs pour un nouveau niveau
 function nouvelleparabole() {
     sauvegarderScore()
     playerX = randomPositionPlayerX(1, 3)
@@ -299,20 +295,13 @@ let username = localStorage.getItem('mathAttaqueUser') || "Joueur"
 document.getElementById("usernameDisplay").innerText = "Joueur : " + username
 
 let level = 1
-
-// Incremente le niveau et met a jour l'affichage
 function levelCounter() {
     level += 1
     document.getElementById("level").textContent = "Niveau: " + level
 }
-
-// Rejoue l'animation CSS de tremblement d'ecran
 function screenShake() {
-    // Retire la classe pour remettre l'animation a zero
     document.body.classList.remove("screenShake")
-    // Force un reflow pour que l'animation puisse rejouer immediatement
     // https://developer.mozilla.org/fr/docs/Web/API/HTMLElement/offsetWidth
     void document.body.offsetWidth
-    // Rajoute la classe  l'animation CSS "shake" recommence
     document.body.classList.add("screenShake")
 }
