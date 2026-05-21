@@ -13,13 +13,12 @@ body {
     padding: 0;
 }
 
-/* Canvas du jeu  plein ecran, gere par JS */
+/* Canvas du jeu  plein ecran*/
 /* https://developer.mozilla.org/fr/docs/Web/HTML/Element/canvas */
 #myCanvas { 
     display: block;
 }
 
-/* Degrade sombre par-dessus le fond de la homepage */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/gradient/linear-gradient */
 .home-overlay { 
     position: absolute; 
@@ -28,7 +27,7 @@ body {
     z-index: 1;
 } 
 
-/* Conteneur principal de la homepage  centre tout verticalement */
+/* Conteneur principal de la homepage */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/CSS_flexible_box_layout */
 .home-content { 
     position: relative; 
@@ -40,7 +39,7 @@ body {
     justify-content: center;
 } 
 
-/* Logo principal  taille fluide selon la largeur de la fenetre */
+/* Logo*/
 /* https://developer.mozilla.org/fr/docs/Web/CSS/clamp */
 .logo { 
     font: 500 clamp(52px, 9vw, 100px) 'Bebas Neue', sans-serif; 
@@ -62,7 +61,7 @@ body {
     margin-bottom: 40px; 
 }
 
-/* Ligne horizontale contenant le champ nom + bouton */
+/* Ligne horizontale nom + bouton */
 /* https://www.youtube.com/watch?v=RFGiYHPKWgg */
 .username-row {
     display: flex;
@@ -73,7 +72,7 @@ body {
     pointer-events: all;
 }
 
-/* Champ de saisie du nom de joueur */
+/* Champ de username*/
 /* https://developer.mozilla.org/fr/docs/Web/CSS/pointer-events */
 #username-input {
     background: rgba(255,255,255,0.1);
@@ -95,7 +94,7 @@ body {
     color: rgba(255,255,255,0.4);
 }
 
-/* Bouton avec degrade rouge/noir et bordure arrondie */
+/* Bouton avec rouge/noir et bordure arrondie */
 .gradient {
     padding: 1px;
     background: #dfdfdf;
@@ -110,7 +109,7 @@ body {
     transition: all 1s ease-in-out;
 }
 
-/* Degrade rouge → noir en pseudo-element derriere le bouton */
+/*  noir en pseudo-element derriere le bouton */
 .gradient::after {
     content: '';
     position: absolute;
@@ -150,7 +149,7 @@ a {
     transition: all 1s ease-in-out;
 }
 
-/* Meme degrade rouge → noir que .gradient */
+/* Meme que .gradient */
 .levelSel::after {
     content: '';
     position: absolute;
@@ -167,7 +166,7 @@ a {
     z-index: 0;
 }
 
-/* Texte des boutons de niveau */
+/* Texte des boutonsde niveau */
 .levelSel a {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 20px;
@@ -175,7 +174,7 @@ a {
     color: #000;
 }
 
-/* Conteneur plein ecran centre  utilise pour l'intro */
+/* Conteneur plein ecran centre */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/position */
 .screen { 
     position: fixed; 
@@ -186,7 +185,7 @@ a {
     z-index: 10;
 } 
 
-/* Grille decorative de fond  non cliquable */
+/* Grille decorative de fond*/
 /* https://developer.mozilla.org/fr/docs/Web/CSS/pointer-events */
 .grid { 
     position: absolute;
@@ -205,7 +204,7 @@ video {
     z-index: 1;
 }
 
-/* Nom du joueur fixe en haut a gauche pendant le jeu */
+/* Nom du joueur */
 #usernameDisplay {
     position: fixed;
     top: 16px;
@@ -217,7 +216,7 @@ video {
     font-size: 22px;
 }
 
-/* Panneau d'entree fixe en bas de l'ecran pendant le jeu */
+/* Panneau d'entree */
 #ui-panel {
     position: fixed;
     bottom: 0;
@@ -230,7 +229,7 @@ video {
     pointer-events: none; 
 }
 
-/* Reactive les clics sur les elements a l'interieur du panneau */
+/* Reactive les clics dans  du panneau */
 #ui-panel * {
     pointer-events: auto;
 }
@@ -244,7 +243,7 @@ video {
     letter-spacing: 2px;
 }
 
-/* Ligne contenant l'equation et les inputs */
+/* Ligne contenant l'equation */
 .equation-row {
     display: flex;
     align-items: center;
@@ -255,7 +254,7 @@ video {
     font-family: 'Rajdhani', sans-serif;
 }
 
-/* Champs de saisie des variables a, b, c */
+/* Champs de saisie des variables a et b, c */
 .abc {
     background-color: #1a1a1a;
     color: #fff;
@@ -288,7 +287,7 @@ textarea {
     letter-spacing: 2px;
 }
 
-/* Compteur de tirs restants fixe en haut a gauche */
+/* Compteur de tirs restants */
 #tirs-restants {
     position: fixed;
     top: 75px;
@@ -300,7 +299,7 @@ textarea {
     font-size: 22px;
 }
 
-/* Numero de niveau fixe en haut a gauche */
+/* Numero de niveau */
 #level {
     position: fixed;
     top: 50px;
@@ -312,7 +311,7 @@ textarea {
     font-size: 22px;
 }
 
-/* Zone d'affichage HIT / Miss / erreurs */
+/* HIT / Miss / erreurs */
 #divAffiche {
     margin-top: 8px;
     font-size: 24px;
@@ -328,12 +327,21 @@ textarea {
     animation-iteration-count: 1;
 }
 
-/* Animation de tremblement d'ecran au HIT */
+/* Animation de tremblement  */
 @keyframes shake {
-    0%   { transform: translate(1px, 1px)   rotate(0deg);  }
-    10%  { transform: translate(-1px, -2px) rotate(-1deg); }
-    20%  { transform: translate(-3px, 0px)  rotate(1deg);  }
-    30%  { transform: translate(3px, 2px)   rotate(0deg);  }
+    0%   { 
+        transform: translate(1px, 1px)   rotate(0deg); 
+    
+    }
+    10%  {
+        transform: translate(-1px, -2px) rotate(-1deg); 
+    }
+    20%  { 
+        transform: translate(-3px, 0px)  rotate(1deg); 
+    }
+    30%  {
+        transform: translate(3px, 2px)   rotate(0deg);  
+    }
     40%  { transform: translate(1px, -1px)  rotate(1deg);  }
     50%  { transform: translate(-1px, 2px)  rotate(-1deg); }
     60%  { transform: translate(-3px, 1px)  rotate(0deg);  }
@@ -343,7 +351,7 @@ textarea {
     100% { transform: translate(1px, -2px)  rotate(-1deg); }
 }
 
-/* Bouton Instructions fixe en haut a droite */
+/* Bouton Instructions */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/position */
 #instructions-btn {
     position: fixed;
