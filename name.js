@@ -1,3 +1,4 @@
+// Gère la saisie du nom du joueur et la persistance via localStorage
 
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String/trim
 function nouveauNom() {
@@ -27,8 +28,10 @@ document.getElementById('username-input').addEventListener('keydown', function(e
         nouveauNom()
 })
 
-// Si le joueur a deja entrer son nom, on le remets automatiquement
-const nomSauvegarde = localStorage.getItem('mathAttaqueUser')
+// FIX: var au lieu de const — const ne peut pas etre re-declare si homepage.js
+// a deja utilise le meme nom dans le meme scope global
+// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/var
+var nomSauvegarde = localStorage.getItem('mathAttaqueUser')
 if (nomSauvegarde) {
     document.getElementById('username-input').value = nomSauvegarde
     document.getElementById('niveau').style.display = 'block'
