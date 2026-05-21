@@ -27,8 +27,6 @@ document.getElementById('username-input').addEventListener('keydown', function(e
     if (e.key === 'Enter')
         nouveauNom()
 })
-
-// FIX: var au lieu de const — const ne peut pas etre re-declare si homepage.js
 // a deja utilise le meme nom dans le meme scope global
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/var
 var nomSauvegarde = localStorage.getItem('mathAttaqueUser')
