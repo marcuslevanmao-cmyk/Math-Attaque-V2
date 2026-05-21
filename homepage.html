@@ -7,16 +7,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-  <!-- music.js chargé en <head> pour démarrer la musique le plus tôt possible -->
+  <!-- music.js-->
   <script src="music.js"></script>
 <body>
-  <!-- Grille de fond décorative (définie dans style.css) -->
+  <!-- Grille de fond  -->
   <div class="grid"></div>
   <div class="home-bg"></div>
-  <!-- Dégradé sombre par-dessus la vidéo/fond pour lisibilité du texte -->
   <div class="home-overlay"></div>
 
-  <!-- Bouton fixe en haut à droite vers la page d'instructions -->
+  <!-- Bouton fixe vers la page d'instructions -->
   <a id="instructions-btn" href="Instruction.html">? Instructions</a>
 
   <div class="home-content">
@@ -24,7 +23,7 @@
     <div class="logo">Math&nbsp;Att<span class="star">✦</span>que</div>
     <div class="logo-underline"></div>
 
-    <!-- Saisie du nom du joueur — soumis via name.js / homepage.js -->
+    <!-- Saisie du nom du joueursoumis ar name.js -->
     <div class="username-row">
       <label for="username-input">Joueur:</label>
       <input id="username-input" type="text" placeholder="Entrer votre nom" maxlength="20">
@@ -32,7 +31,7 @@
     </div>
     <br>
 
-    <!-- Boutons de niveau — cachés jusqu'à ce qu'un nom soit soumis -->
+    <!-- Boutons de niveau cachés jusqu'à ce qu'un nom est soumis -->
     <div id="niveau" style="display: none;">
       <div class="levelSel"><a href="gameGenerale.html">Forme generale</a></div>
       <br>
@@ -42,7 +41,7 @@
     </div>
     <br>
 
-    <!--Leaderboard — le <tbody> est rempli automatiquement par homepage.js.
+    <!--Leaderboardle <tbody> est rempli automatiquement par homepage.js.
       Structure : <table> > <thead> (titres) + <tbody> (donnees)
       https://www.w3schools.com/html/html_tables.asp-->
     <div id="leaderboard-section">
@@ -62,7 +61,7 @@
     </div>
   </div>
 
-  <!-- homepage.js chargé avant name.js car name.js appelle afficherLeaderboard() -->
+  <!-- homepage.js chargé avant name.js  -->
   <script src="homepage.js"></script>
   <script src="name.js"></script>
 </body>
