@@ -354,6 +354,15 @@ textarea {
     100% { transform: translate(1px, -2px)  rotate(-1deg); }
 }
 
+/* Bouton Menu (ecran de jeu)  fixe en haut a droite, sinon le flex
+   centrant de .screen le tirait au milieu de l'ecran */
+#menu-btn {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 10;
+}
+
 /* Bouton Instructions */
 /* https://developer.mozilla.org/fr/docs/Web/CSS/position */
 #instructions-btn {
