@@ -43,11 +43,7 @@
 
     <div id="niveau" style="display:none;">
       <br>
-      <div class="levelSel"><a href="#" onclick="startGame('generale'); return false;">Forme generale</a></div>
-      <br>
-      <div class="levelSel"><a href="#" onclick="startGame('canonique'); return false;">Forme Canonique</a></div>
-      <br>
-      <div class="levelSel"><a href="#" onclick="startGame('factorisee'); return false;">Forme factorisé</a></div>
+      <div class="levelSel"><a href="#" onclick="startGame(); return false;">JOUER</a></div>
     </div>
     <br>
 
@@ -124,7 +120,7 @@
     </div>
 
     <div class="pied">
-      <a href="#" class="levelSel" onclick="startGame('generale'); return false;">JOUER MAINTENANT</a>
+      <a href="#" class="levelSel" onclick="startGame(); return false;">JOUER MAINTENANT</a>
     </div>
   </div>
 </div>
@@ -136,7 +132,7 @@
   <canvas id="myCanvas"></canvas>
 
   <h2 id="usernameDisplay"></h2><br><br>
-  <div class="gradient"><a href="#" onclick="showScreen('home'); return false;">Menu</a></div><br><br>
+  <div class="gradient" id="menu-btn"><a href="#" onclick="showScreen('home'); return false;">Menu</a></div>
 
   <p id="level">Niveau: 1</p>
 
