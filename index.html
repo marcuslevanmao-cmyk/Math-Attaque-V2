@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Math Attaque</title>
+  <link rel="icon" type="mathAttack/png" href="medias/mathAttack.png">
+  <!-- Feuille de style principale (fonts, logo, boutons, grille de fond...) -->
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- music.js gere la musique de fond -->
+  <script src="music.js"></script>
+</head>
+<body>
+<div class="grid"></div>
+
+<!-- ============================================================ -->
+<!-- ECRAN 1 : INTRO (video d'ouverture -> ecran de chargement)    -->
+<!-- ============================================================ -->
+<div class="screen" id="screen-intro">
+  <video id="opening" muted playsinline preload="auto" src="medias/Opening_Scene.mp4"></video>
+  <video id="loading" muted playsinline preload="auto" hidden src="medias/Loading_screen.mp4"></video>
+</div>
+
+<!-- ============================================================ -->
+<!-- ECRAN 2 : ACCUEIL (nom du joueur, choix du niveau, classement)-->
+<!-- ============================================================ -->
+<div class="screen" id="screen-home" hidden>
+  <div class="home-bg"></div>
+  <div class="home-overlay"></div>
+
+  <a id="instructions-btn" href="#" onclick="showScreen('instructions'); return false;">? Instructions</a>
+
+  <div class="home-content">
+    <div class="logo">Math&nbsp;Att<span class="star">✦</span>que</div>
+    <div class="logo-underline"></div>
+
+    <div class="username-row">
+      <label for="username-input">Joueur:</label>
+      <input id="username-input" type="text" placeholder="Entrer votre nom" maxlength="20">
+      <input type="button" id="btnNomSoum" onclick="nouveauNom()" value="SOUMETTRE" class="tir">
+    </div>
+    <br><br>
+
+    <div id="niveau" style="display:none;">
+      <br>
+      <div class="levelSel"><a href="#" onclick="startGame('generale'); return false;">Forme generale</a></div>
+      <br>
+      <div class="levelSel"><a href="#" onclick="startGame('canonique'); return false;">Forme Canonique</a></div>
+      <br>
+      <div class="levelSel"><a href="#" onclick="startGame('factorisee'); return false;">Forme factorisé</a></div>
+    </div>
+    <br>
+
+    <div id="leaderboard-section">
+      <h3>MEILLEURS SCORES</h3>
+      <table id="leaderboard-table">
+        <thead>
+          <tr><th>#</th><th>Joueur</th><th>Niveau</th></tr>
+        </thead>
+        <tbody id="leaderboard-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- ECRAN 3 : INSTRUCTIONS                                        -->
+<!-- ============================================================ -->
+<div class="screen" id="screen-instructions" hidden>
+  <div class="centre">
+    <div style="display:flex; justify-content:center; margin-bottom:2rem; padding-top:1rem;">
+      <a href="#" class="gradient" style="color:#000;" onclick="showScreen('home'); return false;"> ACCUEIL</a>
+    </div>
+
+    <div class="entete">
+      <div class="logo">MATH ATT<span class="star">✦</span>QUE</div>
+      <div class="sous-titre">mode d'emploi</div>
+    </div>
+
+    <div class="bloc-texte">
+      <h2>LE BUT DU JEU</h2>
+      <p>
+        Tu es le <span class="blanc">point cyan</span> a gauche.
+        L'ennemi est le <span class="rouge">point rouge</span> a droite.
+        Tu dois ecrire une formule pour lancer un projectile et le toucher.
+        Tu as <span class="blanc">5 tirs</span> par niveau.
+      </p>
+
+      <div class="separateur"></div>
+
+      <h2>LA FORMULE</h2>
+      <p>Entre deux nombres : <span class="blanc">a</span> et <span class="blanc">b</span>. Le jeu calcule la trajectoire avec :</p>
+      <div class="formule-boite">y = a x t² + b x t</div>
+      <p>
+        <span class="blanc">a</span> = courbure. Toujours negatif (ex: -0.2). Plus negatif = courbe plus courte.<br>
+        <span class="blanc">b</span> = pente de depart. Plus grand = projectile monte plus haut.
+      </p>
+      <div class="boite">
+        <span class="blanc">Point de depart :</span>
+        commence avec <span class="jaune">a = -0.2</span> et <span class="jaune">b = 1.5</span>, puis ajuste.
+      </div>
+
+      <div class="separateur"></div>
+
+      <h2>COMMENT CORRIGER</h2>
+      <table>
+        <thead>
+          <tr><th>Tu vois...</th><th>Tu fais...</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Projectile trop haut</td><td>Rends a plus negatif (-0.20 → -0.27)</td></tr>
+          <tr><td>Projectile trop bas</td><td>Rends a moins negatif (-0.30 → -0.20) ou augmente b</td></tr>
+          <tr><td>Trop court (tombe avant l'ennemi)</td><td>Rends a moins negatif (-0.25 → -0.15)</td></tr>
+          <tr><td>Trop long (depasse l'ennemi)</td><td>Rends a plus negatif (-0.15 → -0.25)</td></tr>
+          <tr><td>Ennemi beaucoup plus haut</td><td>b entre 1.8 et 2.2 / a entre -0.25 et -0.35</td></tr>
+        </tbody>
+      </table>
+
+      <div class="boite">
+        <span class="blanc">Conseil :</span>
+        change a ou b par petits pas (0.05 max).
+        La trainee blanche apres chaque tir te montre ou le projectile est passe.
+      </div>
+    </div>
+
+    <div class="pied">
+      <a href="#" class="levelSel" onclick="startGame('generale'); return false;">JOUER MAINTENANT</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- ECRAN 4 : JEU (les 3 formes partagent le meme canvas/moteur)  -->
+<!-- ============================================================ -->
+<div class="screen" id="screen-game" hidden>
+  <canvas id="myCanvas"></canvas>
+
+  <h2 id="usernameDisplay"></h2><br><br>
+  <div class="gradient"><a href="#" onclick="showScreen('home'); return false;">Menu</a></div><br><br>
+
+  <p id="level">Niveau: 1</p>
+
+  <div id="ui-panel">
+    <h1>Entrer votre parabole</h1>
+
+    <!-- Forme generale : Y = aX² + bX + c -->
+    <div class="equation-row" id="equation-generale">
+      Y =
+      <input type="text" id="gen_a" placeholder="A" class="abc">
+      X² +
+      <input type="text" id="gen_b" placeholder="B" class="abc">
+      X +
+      <input type="text" id="gen_c" placeholder="C" class="abc">
+      <input type="button" onclick="lancer()" value="TIRER" class="tir">
+    </div>
+
+    <!-- Forme canonique : Y = a(X - h)² + k -->
+    <div class="equation-row" id="equation-canonique" hidden>
+      Y =
+      <input type="text" id="can_a" placeholder="a" class="abc">
+      (X -
+      <input type="text" id="can_h" placeholder="h" class="abc">
+      )² +
+      <input type="text" id="can_k" placeholder="k" class="abc">
+      <input type="button" onclick="lancer()" value="TIRER" class="tir">
+    </div>
+
+    <!-- Forme factorisee : Y = a(X - x1)(X - x2) -->
+    <div class="equation-row" id="equation-factorisee" hidden>
+      Y =
+      <input type="text" id="fac_a" placeholder="a" class="abc">
+      (X -
+      <input type="text" id="fac_x1" placeholder="x1" class="abc">
+      ) (X -
+      <input type="text" id="fac_x2" placeholder="x2" class="abc">
+      )
+      <input type="button" onclick="lancer()" value="TIRER" class="tir">
+    </div>
+
+    <div id="divAffiche"></div>
+  </div>
+
+  <audio autoplay loop muted id="bg-music">
+    <source src="medias/background.mp4" type="audio/mp4">
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="explosion"><source src="explosion.mp3" type="audio/mpeg"></audio>
+  <audio id="tir"><source src="tir.mp3" type="audio/mpeg"></audio>
+
+  <p id="tirs-restants">Tirs : 5 / 5</p>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
