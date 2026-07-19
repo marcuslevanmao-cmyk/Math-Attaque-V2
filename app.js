@@ -316,8 +316,24 @@ function lancerProjectile(a, b, c) {
     step()
 }
 
+// Choisit un mode au hasard parmi les 3 formes (pour les niveaux 2+)
+function pickRandomMode() {
+    var modes = ['generale', 'canonique', 'factorisee']
+    return modes[Math.floor(Math.random() * modes.length)]
+}
+
+// Change le mode actif et affiche la bonne rangee d'equation
+function setMode(mode) {
+    currentMode = mode
+    document.getElementById('equation-generale').hidden = mode !== 'generale'
+    document.getElementById('equation-canonique').hidden = mode !== 'canonique'
+    document.getElementById('equation-factorisee').hidden = mode !== 'factorisee'
+}
+
 function nouvelleparabole() {
     sauvegarderScore()
+    // Niveau 1 = toujours forme generale, ensuite un mode aleatoire a chaque niveau
+    setMode(pickRandomMode())
     playerX = randomPosition(1, 3)
     playerY = randomPosition(2, 6)
     enemyX = randomPosition(12, 15)
@@ -392,12 +408,10 @@ function lancer() {
     lancerProjectile(a, b, c)
 }
 
-// Choisit un mode, affiche la bonne rangee d'equation et (re)demarre une partie
-function startGame(mode) {
-    currentMode = mode
-    document.getElementById('equation-generale').hidden = mode !== 'generale'
-    document.getElementById('equation-canonique').hidden = mode !== 'canonique'
-    document.getElementById('equation-factorisee').hidden = mode !== 'factorisee'
+// (Re)demarre une partie  le niveau 1 est toujours en forme generale,
+// les niveaux suivants choisissent une forme au hasard (voir nouvelleparabole)
+function startGame() {
+    setMode('generale')
 
     playerX = randomPosition(1, 3)
     playerY = randomPosition(2, 6)
