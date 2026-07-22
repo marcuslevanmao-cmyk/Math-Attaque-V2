@@ -361,7 +361,7 @@ function screenShake() {
 
 // Vide les champs de saisie des 3 formes (seule celle du mode actif est visible)
 function clearFields() {
-    ['gen_a', 'gen_b', 'gen_c', 'can_a', 'can_h', 'can_k', 'fac_a', 'fac_x1', 'fac_x2'].forEach(function (id) {
+    ['gen_a', 'gen_b', 'can_a', 'can_h', 'can_k', 'fac_a', 'fac_x1', 'fac_x2'].forEach(function (id) {
         document.getElementById(id).value = ""
     })
 }
@@ -373,12 +373,12 @@ function lancer() {
     if (currentMode === 'generale') {
         a = parseFloat(document.getElementById("gen_a").value)
         b = parseFloat(document.getElementById("gen_b").value)
-        c = parseFloat(document.getElementById("gen_c").value)
         if (isNaN(a) || isNaN(b)) {
             document.getElementById("divAffiche").innerText = "Entrez des valeurs pour a et b!"
             return
         }
-        if (isNaN(c)) c = 0 // le champ c est optionnel
+        // c reste toujours 0  sinon le tir ne part plus du point du joueur
+        c = 0
 
     } else if (currentMode === 'canonique') {
         a = parseFloat(document.getElementById("can_a").value)
