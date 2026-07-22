@@ -94,40 +94,36 @@ body {
     color: rgba(255,255,255,0.4);
 }
 
-/* Bouton avec rouge/noir et bordure arrondie */
+/* Bouton "Menu" / "ACCUEIL"  meme esprit epure que #instructions-btn */
 .gradient {
-    padding: 1px;
-    background: #dfdfdf;
-    position: relative;
-    float: right;
-    text-align: right;
-    border-radius: 100px; 
+    box-sizing: border-box;
+    padding: 0 18px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 4px;
     width: 100px;
-    height: 30px;
-    border: none;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 1s ease-in-out;
-
+    transition: all 0.2s ease-in-out;
 }
 
-/*  noir en pseudo-element derriere le bouton */
-.gradient::after {
-    content: '';
-    position: absolute;
-    padding: 5px;
-    width: 100%;
-    height: 100%;
-    border-radius: 100px;
-    background: linear-gradient(to bottom right, red 0% 35%, black 100%);
-    z-index: -1;
-}
-
-/* Texte blanc au survol */
+/* Texte plus clair + bordure plus visible au survol */
 .gradient:hover {
-    color: white;
-    z-index: 0;
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(255,255,255,0.45);
+}
+
+.gradient a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.8);
+}
+
+.gradient:hover a {
+    color: #fff;
 }
 
 /* Supprime le soulignement des liens */
@@ -137,44 +133,36 @@ a {
     color: black;
 }
 
-/* Bouton de selection de niveau  plus grand que .gradient */
+/* Bouton de selection de niveau  meme style que .gradient, en plus grand */
 .levelSel {
-    padding: 1px;
-    background: #dfdfdf;
-    position: relative;
-    border-radius: 150px; 
+    box-sizing: border-box;
+    padding: 0 24px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px;
     width: 250px;
-    height: 70px;
-    border: none;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 1s ease-in-out;
-}
-
-/* Meme que .gradient */
-.levelSel::after {
-    content: '';
-    position: absolute;
-    padding: 5px;
-    width: 100%;
-    height: 100%;
-    border-radius: 100px;
-    background: linear-gradient(to bottom right, red 0% 35%, black 100%);
-    z-index: -1;
+    transition: all 0.2s ease-in-out;
 }
 
 .levelSel:hover {
-    color: white;
-    z-index: 0;
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(255,255,255,0.45);
 }
 
-/* Texte des boutonsde niveau */
+/* Texte des boutons de niveau */
 .levelSel a {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 20px;
     letter-spacing: 3px;
-    color: #000;
+    color: rgba(255,255,255,0.8);
+}
+
+.levelSel:hover a {
+    color: #fff;
 }
 
 /* Conteneur plein ecran centre */
